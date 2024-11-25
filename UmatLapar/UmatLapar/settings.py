@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
-    'sim',
-    'corsheaders',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -60,14 +58,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
-CORS_ALLOW_CREDENTIALS = True  # Allow cookies for cross-origin requests
-CSRF_COOKIE_HTTPONLY = False  # Allow JS to read CSRF cookie if needed
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]  # We add your frontend URL here.
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
 
 ROOT_URLCONF = 'UmatLapar.urls'
 

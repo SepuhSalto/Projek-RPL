@@ -24,7 +24,5 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('users/', include('users.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
-    path('api/set-csrf-token', set_csrf_token, name='set-csrf-token'),
-
-    
+    path('register/', include('users.urls')),
 ]
