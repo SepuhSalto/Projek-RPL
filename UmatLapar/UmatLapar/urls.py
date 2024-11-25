@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from .views import set_csrf_token
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.index),
+    path('', include('homepage.urls')),
     path('users/', include('users.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
+    path('api/set-csrf-token', set_csrf_token, name='set-csrf-token'),
+
     
 ]
