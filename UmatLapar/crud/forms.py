@@ -8,3 +8,11 @@ class UserForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+class UserFormlogin(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = ['name', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }

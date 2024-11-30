@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     {% tailwind_css %}
     <body class="bg-gray-50 font-sans">
         <div class="min-h-screen flex flex-col justify-between">
@@ -48,23 +48,15 @@
                 <div class="bg-white p-8 shadow-md rounded-lg">
                     <h1 class="text-3xl font-bold text-gray-700 mb-4">Create an Account</h1>
                     <p class="text-gray-500 mb-6">Already have an account? <a href="#" class="text-orange-500">Log in</a></p>
-                    <form method="POST" action="{% url 'crud:Register' %}">
+                    <form method="POST" action="{% url 'crud:Login' %}">
                         {% csrf_token %}
                         <div class="mb-4">
-                            <label for="id_first_name" class="block text-sm font-medium text-gray-600">Name</label>
-                            {{ form.name }}
-                        </div>
-                        <div class="mb-4">
-                            <label for="id_email" class="block text-sm font-medium text-gray-600">Email</label>
-                            {{ form.email }}
+                            <label for="id_name" class="block text-sm font-medium text-gray-600">Name</label>
+                            {{form.name}}
                         </div>
                         <div class="mb-4">
                             <label for="id_password" class="block text-sm font-medium text-gray-600">Password</label>
-                            {{ form.password }}
-                        </div>
-                        <div class="mb-4">
-                            <label for="id_location" class="block text-sm font-medium text-gray-600">Location</label>
-                            {{ form.Lokasi }}
+                            {{form.password}}
                         </div>
                         <div class="mb-4 flex items-center">
                             <input type="checkbox" id="terms" name="terms" class="mr-2">
@@ -72,7 +64,7 @@
                                 I agree to the <a href="#" class="text-orange-500">terms of service</a> & <a href="#" class="text-orange-500">privacy policy</a>
                             </label>
                         </div>
-                        <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600">Create Account</button>
+                        <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600">Login</button>
                     </form>
                     
                     <div class="mt-6 text-center text-gray-500">Or Using</div>
@@ -108,7 +100,7 @@
                     <div>
                         <h3 class="text-lg font-semibold text-gray-700">Popular Food</h3>
                         <ul class="text-sm text-gray-500 space-y-2">
-                            <li><a href="#" class="hover:text-orange-500">Fast Food</a></li>
+                            <li><a href="#" class="hover:text-orange-500"></a></li>
                             <li><a href="#" class="hover:text-orange-500">Western Food</a></li>
                             <li><a href="#" class="hover:text-orange-500">Chinese Food</a></li>
                             <li><a href="#" class="hover:text-orange-500">Thailand Food</a></li>

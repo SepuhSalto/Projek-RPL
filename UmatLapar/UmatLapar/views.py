@@ -7,5 +7,3 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def set_csrf_token(request):
     return JsonResponse({'detail': 'CSRF cookie set.'})
     
-def index(request):
-    return render(request, 'index.html')
