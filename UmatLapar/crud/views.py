@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Users
-from .forms import UserForm, UserFormlogin
+from .forms import UserForm, UserFormlogin, UserFormupdate, UserFormupdatepassword, RatingCreateForm
 
 # crud untuk login dan register
 def create(request):
@@ -29,6 +29,45 @@ def read(request):
     else:
         form = UserFormlogin()
     return render(request, 'login.html', {'form': form})
+
+def update_user_profile(request, user_id):
+    user = get_object_or_404(Users, idpengguna=user_id)
+    if request.method == 'POST':
+        form = UserFormupdate(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile', user_id=user_id)
+    else:
+        form = UserFormupdate(instance=user)
+    return render(request, 'update_user_profile.html', {'form': form})
+
+def update_user_password(request, user_id):
+    user = get_object_or_404(Users, idpengguna=user_id)
+    if request.method == 'POST':
+        form = UserFormupdatepassword(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])  
+            user.save()
+            messages.success(request, 'Password updated successfully!')
+            return redirect('login')  
+    else:
+        form = UserFormupdatepassword(instance=user)
+    return render(request, 'update_user_password.html', {'form': form})
+
+def create_rating(request):
+    if request.method == 'POST':
+        form = RatingCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.idpengguna = request.user  
+            rating.save()
+            messages.success(request, 'Rating created successfully!')
+            return redirect('ratings_list')  
+    else:
+        form = RatingCreateForm()
+    return render(request, 'create_rating.html', {'form': form})
 
 def index(request):
     return render(request, 'homepage.html')
