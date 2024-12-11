@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Users
 from .forms import UserForm, UserFormlogin, UserFormupdate, UserFormupdatepassword, RatingCreateForm
+from django.db.models import Avg, Count, Q
+from django.core.paginator import Paginator
 
-# crud untuk login dan register
+#crud untuk login dan register
 def create(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -68,6 +70,63 @@ def create_rating(request):
     else:
         form = RatingCreateForm()
     return render(request, 'create_rating.html', {'form': form})
+
+def landing_page(request):
+    # Get top rated menus for recommendations
+    recommended_menus = Menu.objects.annotate(
+        avg_rating=Avg('rating__rating'),
+        rating_count=Count('rating')
+    ).filter(
+        rating_count__gte=1
+    ).order_by('-avg_rating', '-rating_count')[:8]
+
+    # Get all categories and locations for search filters
+    categories = kategori.objects.all()
+    locations = Location.objects.all()
+
+    context = {
+        'recommended_menus': recommended_menus,
+        'categories': categories,
+        'locations': locations,
+    }
+    return render(request, 'landing_page.html', context)
+
+def advanced_search(request):
+    query = request.GET.get('query', '')
+    category_id = request.GET.get('category', '')
+    location_id = request.GET.get('location', '')
+
+    # Start with all menus
+    menu_results = Menu.objects.annotate(
+        avg_rating=Avg('rating__rating'),
+        rating_count=Count('rating')
+    )
+
+    # Apply filters based on search criteria
+    if query:
+        menu_results = menu_results.filter(
+            Q(namaMenu__icontains=query) |
+            Q(idrestoran__namaRestoran__icontains=query)
+        )
+
+    if category_id:
+        menu_results = menu_results.filter(idkategori_id=category_id)
+
+    if location_id:
+        menu_results = menu_results.filter(idrestoran__idlocation_id=location_id)
+
+    # Order by rating
+    menu_results = menu_results.order_by('-avg_rating', '-rating_count')
+
+    context = {
+        'menu_results': menu_results,
+        'query': query,
+        'selected_category': category_id,
+        'selected_location': location_id,
+        'categories': kategori.objects.all(),
+        'locations': Location.objects.all(),
+    }
+    return render(request, 'search_results.html', context)
 
 def index(request):
     return render(request, 'homepage.html')

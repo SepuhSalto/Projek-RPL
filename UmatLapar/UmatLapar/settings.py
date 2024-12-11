@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'homepage',
+    'rest_framework',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -90,7 +91,7 @@ WSGI_APPLICATION = 'UmatLapar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rpl',
+        'NAME': 'rpln',
         'USER': 'root',
         'PASSWORD': 'Iza2806.',
         'HOST': '127.0.0.1', 
