@@ -32,3 +32,6 @@ def read(request):
 
 def index(request):
     return render(request, 'homepage.html')
+
+def profile(request):
+    return render(request, 'profile.html')

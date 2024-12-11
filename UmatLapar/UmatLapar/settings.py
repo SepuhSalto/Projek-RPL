@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'UmatLapar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'users',
+        'NAME': 'rpl',
         'USER': 'root',
-        'PASSWORD': 'Iza2806.',
+        'PASSWORD': 'anjaymabar',
         'HOST': '127.0.0.1', 
         'PORT': '3306',
     }

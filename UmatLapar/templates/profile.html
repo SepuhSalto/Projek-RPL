@@ -1,0 +1,172 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umat Lapar - Profile</title>
+    {% tailwind_css %}
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <img src="logo.png" alt="Umat Lapar Logo" class="w-8 h-8" />
+          <span class="text-lg font-bold text-orange-500">Umat Lapar</span>
+        </div>
+        <div class="space-x-6">
+          <a href="#" class="text-gray-700 hover:text-orange-500">Home</a>
+          <a href="#" class="text-gray-700 hover:text-orange-500">About Us</a>
+          <a href="#" class="text-gray-700 hover:text-orange-500">Search</a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <span class="text-gray-700">Esa Nandana</span>
+          <div
+            class="bg-orange-500 text-white w-8 h-8 flex items-center justify-center rounded-full"
+          >
+            E
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex gap-8">
+        <!-- Sidebar -->
+        <div class="w-1/4 bg-white shadow rounded p-4">
+          <div class="text-center">
+            <img
+              src="profile.jpg"
+              alt="Profile Picture"
+              class="w-24 h-24 mx-auto rounded-full"
+            />
+            <h2 class="text-lg font-bold mt-4">Esa Nandana</h2>
+            <p class="text-sm text-gray-500">Senior Reviewer</p>
+            <p class="text-yellow-500 mt-2">★★★★★</p>
+          </div>
+          <div class="mt-6 space-y-4">
+            <div class="flex justify-between text-sm">
+              <span>Following</span>
+              <span>10,231</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span>Followers</span>
+              <span>1,201</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span>Points</span>
+              <span>5,023</span>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h3 class="text-sm font-semibold mb-2">Albums</h3>
+            <div class="grid grid-cols-3 gap-2">
+              <img
+                src="food1.jpg"
+                alt="Album Image"
+                class="w-full h-full object-cover rounded"
+              />
+              <img
+                src="food2.jpg"
+                alt="Album Image"
+                class="w-full h-full object-cover rounded"
+              />
+              <img
+                src="food3.jpg"
+                alt="Album Image"
+                class="w-full h-full object-cover rounded"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-3/4">
+          <!-- Header -->
+          <div class="bg-white shadow rounded p-6">
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold">Esa Nandana</h1>
+              <button
+                class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+
+          <!-- Favorite Foods and Restaurants -->
+          <div class="mt-8 bg-white shadow rounded p-6">
+            <h2 class="text-xl font-semibold mb-4">
+              Makanan & Resto Favorit Saya
+            </h2>
+
+            <div>
+              <h3 class="text-lg font-bold">Makanan</h3>
+              <div class="space-y-4 mt-4">
+                <div class="flex items-center">
+                  <img
+                    src="food1.jpg"
+                    alt="Food"
+                    class="w-16 h-16 object-cover rounded"
+                  />
+                  <div class="ml-4">
+                    <h4 class="font-semibold">Babi Guling Pan Ana</h4>
+                    <p class="text-sm text-gray-500">3,812 Reviews</p>
+                    <p class="text-yellow-500">★★★★★</p>
+                  </div>
+                </div>
+                <div class="flex items-center">
+                  <img
+                    src="food2.jpg"
+                    alt="Food"
+                    class="w-16 h-16 object-cover rounded"
+                  />
+                  <div class="ml-4">
+                    <h4 class="font-semibold">Babi Guling Sigma Mewing</h4>
+                    <p class="text-sm text-gray-500">3,812 Reviews</p>
+                    <p class="text-yellow-500">★★★★★</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h3 class="text-lg font-bold">Restoran</h3>
+              <div class="space-y-4 mt-4">
+                <div class="flex items-center">
+                  <img
+                    src="resto.jpg"
+                    alt="Resto"
+                    class="w-16 h-16 object-cover rounded"
+                  />
+                  <div class="ml-4">
+                    <h4 class="font-semibold">Restoran Gede Gedi</h4>
+                    <p class="text-sm text-gray-500">3,812 Reviews</p>
+                    <p class="text-yellow-500">★★★★★</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow mt-8">
+      <div class="container mx-auto px-4 py-6 flex justify-between">
+        <p class="text-sm text-gray-500">
+          © 2024 Umat Lapar - All Rights Reserved
+        </p>
+        <div class="flex space-x-4 text-sm text-gray-500">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
