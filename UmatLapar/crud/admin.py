@@ -1,5 +1,5 @@
 from django.contrib import admin
-from crud.models import Users, Rating, Restoran, Event, Menu, kategori, Location
+from crud.models import Users, Rating, Restoran, Menu, kategori, Location
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
@@ -12,12 +12,6 @@ class RatingAdmin(admin.ModelAdmin):
     list_display = ('idrating', 'idpengguna', 'idmenu', 'rating', 'created_at', 'updated_at')
     search_fields = ('idpengguna__username', 'idmenu__namaMenu')
     list_filter = ('created_at', 'updated_at')
-
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-    list_display = ('idevent', 'namaevent', 'tanggal', 'lokasi', 'created_at', 'updated_at')
-    search_fields = ('namaevent', 'lokasi')
-    list_filter = ('tanggal', 'created_at')
 
 @admin.register(Restoran)
 class RestoranAdmin(admin.ModelAdmin):

@@ -1,5 +1,5 @@
 import django_filters
-from .models import Menu, Restoran, Event, kategori, Location
+from .models import Menu, Restoran,kategori, Location
 from django.db.models import Avg
 
 class MenuFilter(django_filters.FilterSet):

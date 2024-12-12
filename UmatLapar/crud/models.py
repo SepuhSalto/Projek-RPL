@@ -71,20 +71,6 @@ class Restoran(models.Model):
     def __str__(self):
         return self.namaRestoran
 
-class Event(models.Model):
-    idevent = models.BigAutoField(primary_key=True)
-    idrestoran = models.ForeignKey(Restoran, on_delete=models.CASCADE)
-    namaevent = models.CharField(max_length=50)
-    deskripsi = models.TextField(blank=False)
-    tanggal = models.DateField()
-    lokasi = models.TextField(blank=False)
-    foto = models.ImageField(upload_to='images/', blank=True)
-    video = models.FileField(upload_to='videos/', blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.namaevent
 
 class Menu(models.Model):
     idmenu = models.BigAutoField(primary_key=True)
