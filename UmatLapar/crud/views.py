@@ -21,11 +21,11 @@ def read(request):
     if request.method == 'POST':
         form = UserFormlogin(request.POST)
         if form.is_valid():
-            name = request.POST.get('name')
+            name = request.POST.get('username')
             password = request.POST.get('password')
             
             try:
-                user = Users.objects.get(name=name, password=password)
+                user = Users.objects.get(username=name, password=password)
                 return redirect('crud:homepage')
             except Users.DoesNotExist:
                 messages.success(request, ("Email atau Password salah"))
@@ -85,4 +85,39 @@ def recommend_menus(request, user_id):
     return render(request, 'recommendations.html', context)
 
 def index(request):
-    return render(request, 'homepage.html')
+    current_user = request.user
+    try:
+        custom_user = Users.objects.get(idpengguna=current_user.id)
+        user_id = custom_user.idpengguna
+        username = custom_user.username
+        recommended_menus = get_recommendations(custom_user)
+    except Users.DoesNotExist:
+        user_id = None
+        username = None
+        recommended_menus = []
+    context = {'user_id': user_id, 'username': username, 'recommended_menus': recommended_menus}
+    return render(request, 'homepage.html', context)
+
+    
+def edit_profile(request, user_id):
+        user = get_object_or_404(Users, idpengguna=user_id)
+        if request.method == 'POST':
+            form = UserFormupdate(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Profile updated successfully!')
+                return redirect('profile', user_id=user_id)
+        else:
+            form = UserFormupdate(instance=user)
+        return render(request, 'edit_profile.html', {'form': form})
+
+
+def profile(request, user_id):
+    user = get_object_or_404(Users, idpengguna=user_id)
+    ratings = Rating.objects.filter(idpengguna=user)
+    context = {
+        'user': user,
+        'ratings': ratings
+    }
+    return render(request, 'profile.html', context)
+    

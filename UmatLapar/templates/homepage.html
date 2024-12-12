@@ -9,7 +9,15 @@
 </head>
 <body>
     <div >
-        <h1>UmatLapar</h1>
+        <p>Logged in as {{ username }}</p>
+        <h1>Menu Recommendations for {{ username }}</h1>
+
+        {% for menu in recommended_menus %}
+        <div>
+            <h3>{{ menu.namaMenu }}</h3>
+            <p>Average Rating: {{ menu.average_rating }}</p> 
+        </div>
+        {% endfor %}
     </div>
 </body>
 </html>
