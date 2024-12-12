@@ -35,3 +35,6 @@ def index(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+def landingpage(request):
+    return render(request, 'landingpage.html')

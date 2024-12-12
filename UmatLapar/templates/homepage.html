@@ -1,15 +1,191 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UmatLapar</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umat Lapar - Home</title>
     {% tailwind_css %}
-</head>
-<body>
-    <div >
-        <h1>UmatLapar</h1>
+  </head>
+    <!-- NavBar -->
+    <nav class="flex justify-between items-center p-5 shadow-md">
+      <!-- flex container -->
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <img src="media/logo.png" alt="Umat Lapar Logo" class="h-8" />
+      </div>
+      <ul class="flex space-x-5">
+        <li><a href="#" class="hover:text-orange-500">Home</a></li>
+        <li><a href="#" class="hover:text-orange-500">About Us</a></li>
+        <li><a href="#" class="hover:text-orange-500">Search</a></li>
+      </ul>
+      <div class="flex items-center space-x-3">
+        <div class="text-gray-700">Esa Nandana</div>
+        <img src="media/profile-button.png" alt="Umat Lapar Logo" class="h-8" />
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="flex items-center justify-between px-16 py-16">
+     <!-- Sisi kiri -->
+     <div class="max-w-md">
+      <p class="text-orange-500 font-medium text-sm mb-2">The best food delivery app in the world</p>
+      <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-4">
+        Hungry? Discover <br />What to Eat!
+      </h1>
+      <p class="text-gray-600 text-lg mb-8">
+        Enhance your food journey effortlessly - because finding the best eats should be exciting, not exhausting.
+      </p>
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="What are you looking?"
+          class="w-full bg-gray-100 text-gray-700 rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-orange-500"
+        />
+      </div>
     </div>
-</body>
+
+    <!-- Sisi Kanan -->
+    <div class="relative">
+      <div class=" p-4 w-64">
+        <div class="mt-4"></div>
+      </div>
+      <img src="template/media/food-image.png" alt="food-image"class="absolute -bottom-16 left-16 w-48 shadow-lg"
+      />
+    </div>
+  </div>
+  
+  <!-- Top 10 Section Best Rated  -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-center my-8 mb-12">Top 10 Best Rated Food of the Month</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="media/card1.png" alt="Cheese Burger" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h2 class="text-lg font-bold">Cheese Burger</h2>
+          <div class="flex items-center my-2">
+            <span class="text-yellow-500 text-sm">★★★★★</span>
+            <span class="ml-2 text-sm text-gray-600">1,129 Reviews</span>
+          </div>
+          <p class="text-gray-600 text-sm">
+            Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+          </p>
+        </div>
+      </div>
+  
+      <!-- Card 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="media/card2.png" alt="Babi Guling Pan Ana" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h2 class="text-lg font-bold">Babi Guling Pan Ana</h2>
+          <div class="flex items-center my-2">
+            <span class="text-yellow-500 text-sm">★★★★☆</span>
+            <span class="ml-2 text-sm text-gray-600">3,812 Reviews</span>
+          </div>
+          <p class="text-gray-600 text-sm">
+            Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+          </p>
+        </div>
+      </div>
+  
+      <!-- Card 3 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="media/card3.png" alt="Nasi Campur Bu Bintang" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h2 class="text-lg font-bold">Nasi Campur Bu Bintang</h2>
+          <div class="flex items-center my-2">
+            <span class="text-yellow-500 text-sm">★★★★☆</span>
+            <span class="ml-2 text-sm text-gray-600">1,110 Reviews</span>
+          </div>
+          <p class="text-gray-600 text-sm">
+            Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+          </p>
+        </div>
+      </div>
+  
+      <!-- Card 4 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="media/card4.png" alt="Nasi Lawar Men Ari" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h2 class="text-lg font-bold">Nasi Lawar Men Ari</h2>
+          <div class="flex items-center my-2">
+            <span class="text-yellow-500 text-sm">★★★★☆</span>
+            <span class="ml-2 text-sm text-gray-600">923 Reviews</span>
+          </div>
+          <p class="text-gray-600 text-sm">
+            Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Top 10 Section Best Rated  -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-center my-8 mb-12">Top 10 Best Rated Food of the Month</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="media/card1.png" alt="Cheese Burger" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Cheese Burger</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★★</span>
+              <span class="ml-2 text-sm text-gray-600">1,129 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="media/card2.png" alt="Babi Guling Pan Ana" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Babi Guling Pan Ana</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">3,812 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="media/card3.png" alt="Nasi Campur Bu Bintang" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Nasi Campur Bu Bintang</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">1,110 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="media/card4.png" alt="Nasi Lawar Men Ari" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Nasi Lawar Men Ari</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">923 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
