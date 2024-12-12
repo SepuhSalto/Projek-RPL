@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="search-form" method="GET">
+        <input type="text" name="query" placeholder="Cari menu...">
+        <button type="submit">Cari</button>
+      </form>
+      
+      <div id="filters">
+        <select name="rating" id="rating-filter">
+          <option value="">Semua Rating</option>
+          <option value="5">5 Bintang</option>
+          <option value="4">4 Bintang</option>
+          </select>
+      
+        <select name="category" id="category-filter">
+          <option value="">Semua Kategori</option>
+          {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.namaKategori }}</option>
+          {% endfor %}
+        </select>
+      
+        <select name="location" id="location-filter">
+          <option value="">Semua Lokasi</option>
+          {% for location in locations %}
+            <option value="{{ location.id }}">{{ location.namaLocation }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div id="results">
+        {% include 'menu_list.html' with menu_list=menu_results %}
+      </div>
+      
+      <script>
+      $(document).ready(function() {
+        $('#search-form, #filters select').on('change', function() {
+          var query = $('#search-form input[name="query"]').val();
+          var rating = $('#rating-filter').val();
+          var category = $('#category-filter').val();
+          var location = $('#location-filter').val();
+      
+          $.ajax({
+            url: '{% url "advanced_search" %}', // Ganti dengan URL view advanced_search
+            data: {
+              query: query,
+              rating: rating,
+              category: category,
+              location: location
+            },
+            success: function(data) {
+              $('#results').html(data); // Update bagian results dengan data baru
+            }
+          });
+        });
+      });
+      </script>
+</body>
+</html>

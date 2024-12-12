@@ -72,7 +72,6 @@ def create_rating(request):
     return render(request, 'create_rating.html', {'form': form})
 
 def landing_page(request):
-    # Get top rated menus for recommendations
     recommended_menus = Menu.objects.annotate(
         avg_rating=Avg('rating__rating'),
         rating_count=Count('rating')
@@ -95,6 +94,7 @@ def advanced_search(request):
     query = request.GET.get('query', '')
     category_id = request.GET.get('category', '')
     location_id = request.GET.get('location', '')
+    rating = request.GET.get('rating', '')
 
     # Start with all menus
     menu_results = Menu.objects.annotate(
@@ -115,6 +115,18 @@ def advanced_search(request):
     if location_id:
         menu_results = menu_results.filter(idrestoran__idlocation_id=location_id)
 
+    if rating:
+        if rating == '5':
+            menu_results = menu_results.filter(rating__rating__gte=5)
+        elif rating == '4':
+            menu_results = menu_results.filter(rating__rating__gte=4, rating__rating__lt=5)
+        elif rating == '3':
+            menu_results = menu_results.filter(rating__rating__gte=3, rating__rating__lt=4)
+        elif rating == '2':
+            menu_results = menu_results.filter(rating__rating__gte=2, rating__rating__lt=3)
+        elif rating == '1':
+            menu_results = menu_results.filter(rating__rating__gte=1, rating__rating__lt=2)
+
     # Order by rating
     menu_results = menu_results.order_by('-avg_rating', '-rating_count')
 
@@ -123,6 +135,7 @@ def advanced_search(request):
         'query': query,
         'selected_category': category_id,
         'selected_location': location_id,
+        'selected_rating': rating,  # Tambahkan selected_rating ke context
         'categories': kategori.objects.all(),
         'locations': Location.objects.all(),
     }
