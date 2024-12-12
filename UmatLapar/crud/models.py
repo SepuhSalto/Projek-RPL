@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db.models import Avg, Count, Q
 from django.core.paginator import Paginator
+from collections import defaultdict
 
 # Create your models here.
 class Users(models.Model):
@@ -23,13 +24,13 @@ class Users(models.Model):
         return self.username
 
 class Location(models.Model):
-    idlocation = models.BigAutoField(primary_key=True, default=1)
-    lokasi = models.TextField(blank=False)
+    idlocation = models.BigAutoField(primary_key=True)
+    lokasi = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.idlocation
+        return self.lokasi
 
 class Rating(models.Model):
     idrating = models.BigAutoField(primary_key=True)
@@ -93,15 +94,8 @@ class Menu(models.Model):
     foto = models.ImageField(upload_to='images/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def get_average_rating(self):
-        ratings = Rating.objects.filter(idmenu=self)
-        if ratings.exists():
-            return ratings.aggregate(Avg('rating'))['rating__avg']
-        return 0
-
-    def get_rating_count(self):
-        return Rating.objects.filter(idmenu=self).count()
+    def average_rating(self):
+        return self.rating_set.aggregate(Avg('rating'))['rating__avg'] or 0 
     def __str__(self):
         return self.namaMenu
 
@@ -112,3 +106,12 @@ def add_points_on_rating(sender, instance, created, **kwargs):
         user = instance.idpengguna
         user.poin += 10
         user.save()
+
+def get_recommendations(user):
+    # Get all menus with at least one rating
+    rated_menus = Menu.objects.annotate(avg_rating=Avg('rating__rating')).filter(avg_rating__isnull=False)
+
+    # Order the menus by average rating in descending order
+    recommended_menus = rated_menus.order_by('-avg_rating')
+
+    return recommended_menus

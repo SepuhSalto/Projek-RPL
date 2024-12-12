@@ -1,5 +1,5 @@
 from django import forms
-from .models import Users, Rating
+from .models import Users, Rating, kategori, Location
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -34,6 +34,5 @@ class RatingCreateForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ['rating', 'komentar', 'foto', 'video']
-
 
 

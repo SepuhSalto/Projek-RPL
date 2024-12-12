@@ -7,6 +7,7 @@ urlpatterns = [
     path('register/', views.create, name='Register'),
     path('login/', views.read, name='Login'),
     path('home/', views.index, name='homepage'),
-    path('', views.landing_page, name='landing_page'),
-    path('search/', views.advanced_search, name='advanced_search'),
+    path('', views.index, name='landingpage'),
+    path('search/', views.menu_list, name='menu_list'),
+    path('recommend/<int:user_id>/', views.recommend_menus, name='recommend_menus')
 ]

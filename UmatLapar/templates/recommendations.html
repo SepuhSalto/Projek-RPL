@@ -1,0 +1,20 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UmatLapar</title>
+    {% tailwind_css %}
+</head>
+<body>
+    <h1>Menu Recommendations for {{ user.username }}</h1>
+
+    {% for menu in menus %}
+    <div>
+        <h3>{{ menu.namaMenu }}</h3>
+        <p>Average Rating: {{ menu.avg_rating }}</p> 
+        </div>
+    {% endfor %}
+</body>
+</html>

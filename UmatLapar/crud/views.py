@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Users
+from .models import Users, Menu, kategori, Location, Rating, get_recommendations
 from .forms import UserForm, UserFormlogin, UserFormupdate, UserFormupdatepassword, RatingCreateForm
+from .filters import MenuFilter
 from django.db.models import Avg, Count, Q
 from django.core.paginator import Paginator
 
@@ -71,75 +72,17 @@ def create_rating(request):
         form = RatingCreateForm()
     return render(request, 'create_rating.html', {'form': form})
 
-def landing_page(request):
-    recommended_menus = Menu.objects.annotate(
-        avg_rating=Avg('rating__rating'),
-        rating_count=Count('rating')
-    ).filter(
-        rating_count__gte=1
-    ).order_by('-avg_rating', '-rating_count')[:8]
+def menu_list(request):
+    menus = Menu.objects.all()
+    menu_filter = MenuFilter(request.GET, queryset=menus)
+    context = {'menu_filter': menu_filter}
+    return render(request, 'search_results.html', context) 
 
-    # Get all categories and locations for search filters
-    categories = kategori.objects.all()
-    locations = Location.objects.all()
-
-    context = {
-        'recommended_menus': recommended_menus,
-        'categories': categories,
-        'locations': locations,
-    }
-    return render(request, 'landing_page.html', context)
-
-def advanced_search(request):
-    query = request.GET.get('query', '')
-    category_id = request.GET.get('category', '')
-    location_id = request.GET.get('location', '')
-    rating = request.GET.get('rating', '')
-
-    # Start with all menus
-    menu_results = Menu.objects.annotate(
-        avg_rating=Avg('rating__rating'),
-        rating_count=Count('rating')
-    )
-
-    # Apply filters based on search criteria
-    if query:
-        menu_results = menu_results.filter(
-            Q(namaMenu__icontains=query) |
-            Q(idrestoran__namaRestoran__icontains=query)
-        )
-
-    if category_id:
-        menu_results = menu_results.filter(idkategori_id=category_id)
-
-    if location_id:
-        menu_results = menu_results.filter(idrestoran__idlocation_id=location_id)
-
-    if rating:
-        if rating == '5':
-            menu_results = menu_results.filter(rating__rating__gte=5)
-        elif rating == '4':
-            menu_results = menu_results.filter(rating__rating__gte=4, rating__rating__lt=5)
-        elif rating == '3':
-            menu_results = menu_results.filter(rating__rating__gte=3, rating__rating__lt=4)
-        elif rating == '2':
-            menu_results = menu_results.filter(rating__rating__gte=2, rating__rating__lt=3)
-        elif rating == '1':
-            menu_results = menu_results.filter(rating__rating__gte=1, rating__rating__lt=2)
-
-    # Order by rating
-    menu_results = menu_results.order_by('-avg_rating', '-rating_count')
-
-    context = {
-        'menu_results': menu_results,
-        'query': query,
-        'selected_category': category_id,
-        'selected_location': location_id,
-        'selected_rating': rating,  # Tambahkan selected_rating ke context
-        'categories': kategori.objects.all(),
-        'locations': Location.objects.all(),
-    }
-    return render(request, 'search_results.html', context)
+def recommend_menus(request, user_id):
+    user = get_object_or_404(Users, idpengguna=user_id)
+    recommended_menus = get_recommendations(user)
+    context = {'user': user, 'menus': recommended_menus}
+    return render(request, 'recommendations.html', context)
 
 def index(request):
     return render(request, 'homepage.html')
