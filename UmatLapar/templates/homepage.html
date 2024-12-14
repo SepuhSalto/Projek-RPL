@@ -1,23 +1,290 @@
-{% load static tailwind_tags %}
+{% load static tailwind_tags %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UmatLapar</title>
     {% tailwind_css %}
-</head>
-<body>
-    <div >
-        <p>Logged in as {{ username }}</p>
-        <h1>Menu Recommendations for {{ username }}</h1>
-
-        {% for menu in recommended_menus %}
-        <div>
-            <h3>{{ menu.namaMenu }}</h3>
-            <p>Average Rating: {{ menu.average_rating }}</p> 
+  </head>
+  {% for menu in recommended_menus %}
+  <body>
+      <!-- NavBar -->
+      <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+        <!-- flex container -->
+        <div class="flex items-center justify-between ml-10">
+          <!-- Logo -->
+          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
         </div>
-        {% endfor %}
+        <ul class="flex space-x-10">
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
+        </ul>
+        <div class="flex items-center space-x-3 mr-10">
+          <div class="text-gray-700">Esa Nandana</div>
+          <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="max-w-7xl mx-auto py-12">
+        <!-- Hero Section -->
+        <div class="flex gap-8 mb-12">
+          <!-- Main Image -->
+          <div class="w-1/2">
+            <img
+              src="{{ menu.foto.url }}"
+              alt="Food"
+              class="rounded-lg w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Title and Rating -->
+          <div class="w-1/2 flex flex-col justify-center">
+            <h1 class="text-6xl font-bold mb-4">Babi Guling Pan Ana</h1>
+            <div class="flex items-center gap-2 mb-4">
+              <!-- Star Rating -->
+              <div class="flex text-yellow-400">
+                <span>★★★★★</span>
+              </div>
+              <span class="text-gray-600">3,812 Reviews</span>
+            </div>
+            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg w-fit">
+              Add a Review
+            </button>
+          </div>
+        </div>
+
+        <!-- Food List Section -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-6">
+            What Food Would You Like to Rate?
+          </h2>
+
+          <!-- Food Item Card -->
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+            >
+              <div class="flex items-center gap-4">
+                <img
+                  src="{{ menu.foto.url }}"
+                  alt="Food"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center gap-2">
+                    <div class="flex text-yellow-400">
+                      <span>★★★★★</span>
+                    </div>
+                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
+                  </div>
+                </div>
+              </div>
+              <button class="p-2 border rounded-lg hover:bg-gray-50">
+                <span class="text-gray-400 py-4 px-3">★</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- {/* Footer */} -->
+      <footer class="bg-white mt-16 border-t">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+          <div class="grid grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img
+                  src="{% static 'mysite/images/Logo.png' %}"
+                  alt="Umat Lapar Logo"
+                  class="w-8 h-8"
+                />
+                <span class="ml-2 font-semibold">Umat Lapar</span>
+              </div>
+              <p class="text-sm text-gray-600">
+                Your Guide to Flavorful Discoveries!
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Company</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">About Us</p>
+                <p class="text-gray-600">Careers</p>
+                <p class="text-gray-600">Blog</p>
+                <p class="text-gray-600">Contact Us</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Popular Food</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Fast Food</p>
+                <p class="text-gray-600">Western Food</p>
+                <p class="text-gray-600">Chinese Food</p>
+                <p class="text-gray-600">Thailand Food</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Our Social Media</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Facebook</p>
+                <p class="text-gray-600">Twitter</p>
+                <p class="text-gray-600">LinkedIn</p>
+                <p class="text-gray-600">Instagram</p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center mt-12 pt-8 border-t text-sm text-gray-500"
+          >
+            <p>© Copyright Umat Lapar 2024</p>
+            <div class="flex space-x-6">
+              <span>FAQ</span>
+              <span>Terms of Condition</span>
+              <span>Privacy Policy</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
-</body>
+  </body>
+  {% endfor %}
 </html>

@@ -1,0 +1,279 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UmatLapar</title>
+    {% tailwind_css %}
+  </head>
+  {% for menu in recommended_menus %}
+  <body>
+    <!-- NavBar -->
+    <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+      <!-- flex container -->
+      <div class="flex items-center justify-between ml-10">
+        <!-- Logo -->
+        <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+        <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+      </div>
+      <ul class="flex space-x-10">
+        <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
+        <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+        <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
+      </ul>
+      <div class="flex items-center space-x-3 mr-10">
+        <div class="text-gray-700">Esa Nandana</div>
+        <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Search Section -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="flex items-center justify-between">
+          <button class="px-4 py-2 text-gray-600 bg-white rounded-lg shadow-sm hover:bg-gray-50">
+              <span class="mr-2">🔍</span> Filters
+          </button>
+          <div class="flex-1 mx-4">
+              <input type="text" placeholder="What are you Looking?" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm  ">
+          </div>
+          <button class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+              Search
+          </button>
+      </div>
+  </div>
+
+  <!-- Food Grid -->
+  <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Babi Guling Mesari -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Babi Guling Mesari" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Babi Guling Mesari</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★★</div>
+                      <span class="text-gray-600 text-sm ml-2">1,129 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">From crisp vegetables to premium meats and flavorful spices, we ensure that every ingredient meets our rigorous standards.</p>
+              </div>
+          </div>
+
+          <!-- Babi Guling Pan Ana -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Babi Guling Pan Ana" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Babi Guling Pan Ana</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">3,812 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Our commitment to the environment means that your meals are delivered in eco-friendly packaging solutions.</p>
+              </div>
+          </div>
+
+          <!-- Babi Guling Jimbaran -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Babi Guling Jimbaran" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Babi Guling Jimbaran</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">1,110 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Whether you're craving something healthy, indulgent, or exotic, Urban Bite offers a diverse menu to satisfy all tastes.</p>
+              </div>
+          </div>
+
+          <!-- Babi Guling Nise -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Babi Guling Nise" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Babi Guling Nise</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">923 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">At Urban Bite, your satisfaction is our top priority. We strive to exceed your expectations at every step.</p>
+              </div>
+          </div>
+
+          <!-- Cheese Burger -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Cheese Burger" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Cheese Burger</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★★</div>
+                      <span class="text-gray-600 text-sm ml-2">1,129 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Premium beef patty with melted cheese, fresh vegetables, and our special sauce in a toasted bun.</p>
+              </div>
+          </div>
+
+          <!-- Nasi Campur Bu Bintang -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Nasi Campur Bu Bintang" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Nasi Campur Bu Bintang</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">1,110 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Traditional mixed rice with various Balinese side dishes, perfect for those who want to try everything.</p>
+              </div>
+          </div>
+
+          <!-- Nasi Lawar Men Ari -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Nasi Lawar Men Ari" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Nasi Lawar Men Ari</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">923 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Famous Balinese mixed vegetables with coconut and minced meat, served with steamed rice.</p>
+              </div>
+          </div>
+
+          <!-- Sate Lilit -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Sate Lilit" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Sate Lilit</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★★</div>
+                      <span class="text-gray-600 text-sm ml-2">856 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Minced fish satay wrapped around lemongrass stalks, grilled to perfection with Balinese spices.</p>
+              </div>
+          </div>
+
+          <!-- Ayam Betutu -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Ayam Betutu" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Ayam Betutu</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★★</div>
+                      <span class="text-gray-600 text-sm ml-2">1,245 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Whole chicken stuffed with traditional Balinese spices, slow-cooked to achieve perfect tenderness.</p>
+              </div>
+          </div>
+
+          <!-- Bebek Goreng -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Bebek Goreng" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Bebek Goreng</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">987 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Crispy fried duck served with fresh vegetables and sambal matah, a Balinese spicy relish.</p>
+              </div>
+          </div>
+
+          <!-- Mie Goreng Jawa -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Mie Goreng Jawa" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Mie Goreng Jawa</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★☆</div>
+                      <span class="text-gray-600 text-sm ml-2">756 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Javanese-style fried noodles with chicken, vegetables, and special sweet soy sauce.</p>
+              </div>
+          </div>
+
+          <!-- Nasi Goreng Seafood -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src="{{ menu.foto.url }}" alt="Nasi Goreng Seafood" class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h3 class="text-lg font-semibold mb-2">Nasi Goreng Seafood</h3>
+                  <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">★★★★★</div>
+                      <span class="text-gray-600 text-sm ml-2">1,078 Reviews</span>
+                  </div>
+                  <p class="text-gray-600 text-sm">Fried rice with fresh seafood mix, vegetables, and special spicy sauce.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="container mx-auto px-4 py-8 flex justify-center space-x-2">
+      <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">1</button>
+      <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">2</button>
+      <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">...</button>
+      <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">></button>
+  </div>
+  
+      <!-- {/* Footer */} -->
+      <footer class="bg-white mt-16 border-t">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+          <div class="grid grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img
+                  src="{% static 'mysite/images/Logo.png' %}"
+                  alt="Umat Lapar Logo"
+                  class="w-8 h-8"
+                />
+                <span class="ml-2 font-semibold">Umat Lapar</span>
+              </div>
+              <p class="text-sm text-gray-600">
+                Your Guide to Flavorful Discoveries!
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Company</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">About Us</p>
+                <p class="text-gray-600">Careers</p>
+                <p class="text-gray-600">Blog</p>
+                <p class="text-gray-600">Contact Us</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Popular Food</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Fast Food</p>
+                <p class="text-gray-600">Western Food</p>
+                <p class="text-gray-600">Chinese Food</p>
+                <p class="text-gray-600">Thailand Food</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Our Social Media</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Facebook</p>
+                <p class="text-gray-600">Twitter</p>
+                <p class="text-gray-600">LinkedIn</p>
+                <p class="text-gray-600">Instagram</p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center mt-12 pt-8 border-t text-sm text-gray-500"
+          >
+            <p>© Copyright Umat Lapar 2024</p>
+            <div class="flex space-x-6">
+              <span>FAQ</span>
+              <span>Terms of Condition</span>
+              <span>Privacy Policy</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+  </body>
+  {% endfor %}
+</html>

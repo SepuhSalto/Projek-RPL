@@ -1,0 +1,275 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UmatLapar</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <!-- <div>
+      <p>Logged in as {{ username }}</p>
+      <h1>Menu Recommendations for {{ username }}</h1>
+
+      {% for menu in recommended_menus %}
+      <div>
+          <h3>{{ menu.namaMenu }}</h3>
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" style="width:200px;height:200px;">
+          <p>Average Rating: {{ menu.average_rating }}</p>
+          <p>Category: {{ menu.idkategori.kategori }}</p>
+      </div>
+  {% endfor %}
+    </div> -->
+    <body>
+      <!-- NavBar -->
+      <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+        <!-- flex container -->
+        <div class="flex items-center justify-between ml-10">
+          <!-- Logo -->
+          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+        </div>
+        <ul class="flex space-x-10">
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
+        </ul>
+        <div class="flex items-center space-x-3 mr-10">
+          <div class="text-gray-700">Esa Nandana</div>
+          <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          </div>
+        </div>
+      </nav>
+  
+<!-- Hero Section -->
+<div class="flex md:flex-row items-center justify-between px-8 md:px-20 py-16">
+  <!-- Sisi kiri -->
+  <div class="max-w-lg text-center md:text-left">
+    <p class="flex item text-gray-500 font-medium text-sm mb-2"><span><img src="{% static 'mysite/images/icon-food.png' %}" alt=""></span>The best food delivery app in the world</p>
+    <h1 class="text-4xl md:text-6xl font-medium text-gray-900 leading-tight mb-4">
+      Hungry? Discover What to Eat!
+    </h1>
+    <p class="text-gray-600 text-base md:text-lg mb-8">
+      Enhance your food journey effortlessly - because finding the best eats should be exciting, not exhausting.
+    </p>
+    <div class="">
+      <input
+        type="text"
+        placeholder="What are you looking?"
+        class="text-center text-sm w-full font-regular bg-gray-100 text-black rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-orange-500"
+      />
+    </div>
+  </div>
+
+  <!-- Sisi kanan -->
+  <div class="flex items-center justify-center mt-10 md:mt-0 lg:w-96 md:w-auto px-10 sm: w-0">
+    <div class="">
+      <img
+        src="{% static 'mysite/images/food-image.png' %}"
+        alt="Croissant"
+        class="w-96 h-auto object-cover"
+      />  
+    </div>
+  </div>
+</div>
+
+{% for menu in recommended_menus %}
+    <!-- Top Section Best Rated  -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-medium text-center my-8 mb-12">Top Best Rated Food of the Month</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Cheese Burger</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★★</span>
+              <span class="ml-2 text-sm text-gray-600">1,129 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Babi Guling Pan Ana</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">3,812 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Nasi Campur Bu Bintang</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">1,110 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+    
+        <!-- Card 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold">Nasi Lawar Men Ari</h2>
+            <div class="flex items-center my-2">
+              <span class="text-yellow-500 text-sm">★★★★☆</span>
+              <span class="ml-2 text-sm text-gray-600">923 Reviews</span>
+            </div>
+            <p class="text-gray-600 text-sm">
+              Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+      <!-- Top 10 Section Best Rated  -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-medium text-center my-10 mb-12">Top Best Reviewers of the Month</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="media/card1.png" alt="Cheese Burger" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-bold">Cheese Burger</h2>
+              <div class="flex items-center my-2">
+                <span class="text-yellow-500 text-sm">★★★★★</span>
+                <span class="ml-2 text-sm text-gray-600">1,129 Reviews</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+              </p>
+            </div>
+          </div>
+      
+          <!-- Card 2 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="media/card2.png" alt="Babi Guling Pan Ana" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-bold">Babi Guling Pan Ana</h2>
+              <div class="flex items-center my-2">
+                <span class="text-yellow-500 text-sm">★★★★☆</span>
+                <span class="ml-2 text-sm text-gray-600">3,812 Reviews</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+              </p>
+            </div>
+          </div>
+      
+          <!-- Card 3 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="media/card3.png" alt="Nasi Campur Bu Bintang" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-bold">Nasi Campur Bu Bintang</h2>
+              <div class="flex items-center my-2">
+                <span class="text-yellow-500 text-sm">★★★★☆</span>
+                <span class="ml-2 text-sm text-gray-600">1,110 Reviews</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+              </p>
+            </div>
+          </div>
+      
+          <!-- Card 4 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="media/card4.png" alt="Nasi Lawar Men Ari" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h2 class="text-lg font-bold">Nasi Lawar Men Ari</h2>
+              <div class="flex items-center my-2">
+                <span class="text-yellow-500 text-sm">★★★★☆</span>
+                <span class="ml-2 text-sm text-gray-600">923 Reviews</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                Lorem ipsum dolor amet, consectetur adipiscing elit. At aliquam taciti semper condimentum.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- {/* Footer */} -->
+      <footer class="bg-white mt-16 border-t">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+          <div class="grid grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img
+                  src="{% static 'mysite/images/Logo.png' %}"
+                  alt="Umat Lapar Logo"
+                  class="w-8 h-8"
+                />
+                <span class="ml-2 font-semibold">Umat Lapar</span>
+              </div>
+              <p class="text-sm text-gray-600">
+                Your Guide to Flavorful Discoveries!
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Company</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">About Us</p>
+                <p class="text-gray-600">Careers</p>
+                <p class="text-gray-600">Blog</p>
+                <p class="text-gray-600">Contact Us</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Popular Food</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Fast Food</p>
+                <p class="text-gray-600">Western Food</p>
+                <p class="text-gray-600">Chinese Food</p>
+                <p class="text-gray-600">Thailand Food</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Our Social Media</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Facebook</p>
+                <p class="text-gray-600">Twitter</p>
+                <p class="text-gray-600">LinkedIn</p>
+                <p class="text-gray-600">Instagram</p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center mt-12 pt-8 border-t text-sm text-gray-500"
+          >
+            <p>© Copyright Umat Lapar 2024</p>
+            <div class="flex space-x-6">
+              <span>FAQ</span>
+              <span>Terms of Condition</span>
+              <span>Privacy Policy</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    </body>
+    </body>
+</html>
