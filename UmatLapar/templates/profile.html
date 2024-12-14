@@ -1,0 +1,193 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Review Profile Page</title>
+  {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-extrabold text-gray-800">Umat Lapar</a>
+      <div class="space-x-6">
+        <a href="homepage.html" class="text-gray-700 hover:text-orange-500 text-lg font-medium">Home</a>
+        <a href="#" class="text-gray-700 hover:text-orange-500 text-lg font-medium">About Us</a>
+        <a href="search_results.html" class="text-gray-700 hover:text-orange-500 text-lg font-medium">Search</a>
+      </div>
+      <a href="profile.html" class="text-gray-700 font-medium flex items-center">
+        <span class="mr-2">Esa Nandana</span>
+        <img src="https://via.placeholder.com/40" alt="Profile" class="w-10 h-10 rounded-full">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative bg-cover bg-center h-96" style="background-image: url('https://via.placeholder.com/1200x400');">
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+  </div>
+
+  <!-- Profile and Main Content Section -->
+  <div class="container mx-auto px-6 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Profile Section -->
+      <div class="lg:col-span-1">
+        <div class="bg-white p-6 rounded shadow relative">
+          <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-lg">
+          </div>
+          <div class="text-center mt-12">
+            <h2 class="text-xl font-bold">Esa Nandana</h2>
+            <p class="text-sm text-gray-500">Senior Reviewer</p>
+            <div class="mt-4 grid grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-semibold text-gray-700">Follower</h3>
+                <p class="text-2xl font-bold text-orange-500">10,231</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-700">Following</h3>
+                <p class="text-2xl font-bold text-orange-500">1,201</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h3 class="font-semibold text-gray-700 text-sm">Albums</h3>
+            <div class="grid grid-cols-3 gap-2 mt-4">
+              <img src="https://via.placeholder.com/100" alt="Album 1" class="w-full h-20 object-cover rounded">
+              <img src="https://via.placeholder.com/100" alt="Album 2" class="w-full h-20 object-cover rounded">
+              <img src="https://via.placeholder.com/100" alt="Album 3" class="w-full h-20 object-cover rounded">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Section -->
+      <div class="lg:col-span-2">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <!-- Header -->
+          <div class="flex flex-col lg:flex-row items-center lg:items-start justify-between mb-6">
+            <div class="text-center lg:text-left">
+              <h1 class="text-4xl font-extrabold">Esa Nandana</h1>
+              <p class="text-lg text-gray-600 mt-2">Senior Reviewer</p>
+              <div class="flex items-center mt-2">
+                <span class="text-yellow-500">★★★★☆</span>
+              </div>
+            </div>
+            <button class="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 mt-4 lg:mt-0">Edit Profile
+            <a href="edit-profile.html"></a>
+            </button>
+          </div>
+          <h2 class="text-2xl font-bold mb-6">Food Reviews</h2>
+          <div class="bg-gray-50 p-6 rounded shadow mb-6">
+            <h3 class="text-lg font-semibold">Makanan ini lezat sekali guys!</h3>
+            <p class="text-gray-600">Aku ingin mencicipinya lagi hahaha.</p>
+            <img src="https://via.placeholder.com/1200x800" alt="Food Image" class="w-full h-auto mt-4 rounded">
+            <div class="flex justify-between items-center mt-4">
+              <span class="text-sm text-gray-500">2024-12-01</span>
+              <div class="flex space-x-1">
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded shadow mb-6">
+            <h3 class="text-lg font-semibold">Not Bad</h3>
+            <p class="text-gray-600">The burger was decent but a bit overpriced.</p>
+            <img src="https://via.placeholder.com/1200x800" alt="Food Image" class="w-full h-auto mt-4 rounded">
+            <div class="flex justify-between items-center mt-4">
+              <span class="text-sm text-gray-500">2024-12-02</span>
+              <div class="flex space-x-1">
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+                <span class="text-yellow-500">★</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Favorite Section -->
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+      <h2 class="text-xl font-semibold mb-4">Makanan & Resto Favorit Saya</h2>
+      <div class="mt-4">
+        <h3 class="text-lg font-bold">Makanan</h3>
+        <div class="space-y-4 mt-4">
+          <div class="flex items-center px-10 py-3 bg-gray-50 rounded">
+            <img src="https://via.placeholder.com/64" alt="Food" class="w-16 h-16 object-cover rounded">
+            <div class="ml-4">
+              <h4 class="font-semibold">Babi Guling Pan Ana</h4>
+              <p class="text-sm text-gray-500">3.812 Reviews</p>
+              <div class="flex text-yellow-500">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span class="text-gray-300">★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center px-10 py-3 bg-gray-50 rounded">
+            <img src="https://via.placeholder.com/64" alt="Food" class="w-16 h-16 object-cover rounded">
+            <div class="ml-4">
+              <h4 class="font-semibold">Babi Guling Sigma Mewing</h4>
+              <p class="text-sm text-gray-500">3.812 Reviews</p>
+              <div class="flex text-yellow-500">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span class="text-gray-300">★</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-bold mt-6">Resto</h3>
+        <div class="flex items-center px-10 py-3 bg-gray-50 rounded">
+          <img src="https://via.placeholder.com/64" alt="Food" class="w-16 h-16 object-cover rounded">
+          <div class="ml-4">
+            <h4 class="font-semibold">Restoran Geda Gedi</h4>
+            <p class="text-sm text-gray-500">3.812 Reviews</p>
+            <div class="flex text-yellow-500">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span class="text-gray-300">★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center">
+        <button class="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">See All Reviews</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Umat Lapar</h3>
+        <p class="text-sm text-gray-500">Your Guide to Flavorful Discoveries!</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Company</h3>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li><a href="#" class="hover:text-orange-500">About Us</a></li>
+          <li><a href="#" class="hover:text-orange-500">Careers</a></li>
+          <li><a href="#" class="hover:text-orange-500">Blog</a></li>
+          <li><a href="#" class="hover:text-orange-500">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Popular Food</h3>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li><a href="search_results.html" class="hover:text-orange-500">Western Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Chinese Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Thailand Food</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-sm text-gray-500 mt-6">&copy; Copyright Umat Lapar 2024</div>
+  </footer>
+</body>
+</html>
