@@ -52,7 +52,7 @@
                         {% csrf_token %}
                         <div class="mb-4">
                             <label for="id_first_name" class="block text-sm font-medium text-gray-600">Name</label>
-                            {{ form.name }}
+                            {{ form.username }}
                         </div>
                         <div class="mb-4">
                             <label for="id_email" class="block text-sm font-medium text-gray-600">Email</label>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="id_location" class="block text-sm font-medium text-gray-600">Location</label>
-                            {{ form.Lokasi }}
+                            {{ form.alamat }}
                         </div>
                         <div class="mb-4 flex items-center">
                             <input type="checkbox" id="terms" name="terms" class="mr-2">

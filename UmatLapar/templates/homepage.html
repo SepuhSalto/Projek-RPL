@@ -13,11 +13,19 @@
         <h1>Menu Recommendations for {{ username }}</h1>
 
         {% for menu in recommended_menus %}
-        <div>
-            <h3>{{ menu.namaMenu }}</h3>
-            <p>Average Rating: {{ menu.average_rating }}</p> 
-        </div>
+            <div>
+                <div>
+                    <h3>{{ menu.namaMenu }}</h3>
+                    <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" style="width:200px;height:200px;">
+                    <p>Average Rating: {{ menu.average_rating }}</p>
+                    <p>Category: {{ menu.idkategori.kategori }}</p>
+                    <a href="{% url 'crud:rating_details' menu.idmenu %}">View Rating Details</a>
+                </div>
+                <a href="{% url 'crud:create_rating' menu.idmenu %}">Rate this menu</a>
+            </div>
         {% endfor %}
+     
+        
     </div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rating Details</title>
+</head>
+<body>
+    <h1>Ratings for {{ menu.namaMenu }}</h1>
+    <h2>Restaurant: {{ restaurant.namaRestoran }}</h2>
+    <a href="{% url 'crud:restaurant_details' restaurant.idrestoran %}">View Restaurant Details</a>
+    <ul>
+        {% for rating in ratings %}
+            <li>
+                <strong>{{ rating.idpengguna.username }}:</strong> {{ rating.rating }} - {{ rating.komentar }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

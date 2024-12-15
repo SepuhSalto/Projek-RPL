@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.namaRestoran }}</title>
+</head>
+<body>
+    <h1>{{ restaurant.namaRestoran }}</h1>
+    <p>{{ restaurant.description }}</p>
+    <h2>Menus</h2>
+    <ul>
+        {% for menu in menus %}
+            <li>
+                <h3>{{ menu.name }}</h3>
+                <p>{{ menu.description }}</p>
+                <p>Average Rating: {{ menu.avg_rating|default:"No ratings yet" }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

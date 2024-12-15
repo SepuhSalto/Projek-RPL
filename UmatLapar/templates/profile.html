@@ -1,0 +1,156 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umat Lapar - Profile</title>
+    {% tailwind_css %}
+    <style>
+        .half-star::before {
+            content: '★';
+            color: orange;
+            position: absolute;
+            clip-path: inset(0 50% 0 0);
+        }
+        .half-star {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="{% static 'logo.png' %}" alt="Umat Lapar Logo" class="w-8 h-8">
+                <span class="text-lg font-bold text-orange-500">Umat Lapar</span>
+            </div>
+            <div class="space-x-6 hidden md:flex">
+                <a href="#" class="text-gray-700 hover:text-orange-500">Home</a>
+                <a href="#" class="text-gray-700 hover:text-orange-500">About Us</a>
+                <a href="#" class="text-gray-700 hover:text-orange-500">Search</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-700">{{ user.username }}</span>
+                <div class="bg-orange-500 text-white w-8 h-8 flex items-center justify-center rounded-full">
+                    {{ user.username|slice:":2"|upper }}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow rounded overflow-hidden">
+            <img src="{% static 'header.jpg' %}" alt="Profile Header" class="w-full h-60 object-cover">
+            <div class="flex px-6 py-4">
+                <!-- Left Sidebar -->
+                <div class="w-1/4 text-center">
+                    <img src="{{ user.foto_profil.url}}" alt="Profile Picture" class="w-24 h-24 mx-auto rounded-full -mt-12 border-4 border-white">
+                    <h2 class="text-lg font-bold mt-4">{{ user.username }}</h2>
+                    <p class="text-sm text-gray-500">{{user.pekerjaan}}r</p>
+                    <div class="flex justify-center mt-2 space-x-1">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= user.poin|divisibleby:1000 %}
+                                <span class="text-yellow-500">★</span>
+                            {% else %}
+                                <span class="half-star text-gray-300">★</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <p>Points: <span class="font-semibold">{{ user.poin }}</span></p>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h3 class="font-semibold">Albums</h3>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <img src="{% static 'album1.jpg' %}" alt="Album" class="w-full h-16 object-cover rounded">
+                            <img src="{% static 'album2.jpg' %}" alt="Album" class="w-full h-16 object-cover rounded">
+                            <img src="{% static 'album3.jpg' %}" alt="Album" class="w-full h-16 object-cover rounded">
+                            <img src="{% static 'album4.jpg' %}" alt="Album" class="w-full h-16 object-cover rounded">
+                            <img src="{% static 'album5.jpg' %}" alt="Album" class="w-full h-16 object-cover rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="w-3/4 pl-6">
+                    <div class="flex justify-between items-center">
+                        <h1 class="text-2xl font-bold">{{ user.username }}</h1>
+                        <a href="{% url 'crud:update_user_profile' user.idpengguna %}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                            Edit Profile
+                        </a>
+                    </div>
+                    <p class="mt-4 text-gray-700">{{ user.hobi }}</p>
+                    <div class="mt-6">
+                        <img src="{% static 'highlight.jpg' %}" alt="Highlight" class="w-full rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Menus Section -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow rounded p-6">
+            <h2 class="text-xl font-semibold mb-4">Favorite Menus</h2>
+            <div class="space-y-4">
+                {% for menu in favorite_menus %}
+                    <div class="flex items-center">
+                        <img src="{{ menu.foto.url }}" alt="Menu" class="w-16 h-16 object-cover rounded">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">{{ menu.namaMenu }}</h4>
+                            <div class="flex text-yellow-500">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= menu.average_rating %}
+                                        <span>★</span>
+                                    {% else %}
+                                        <span class="half-star text-gray-300">★</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="text-sm text-gray-500">
+                                {{ menu.rating_count }} reviews
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-white border-t">
+        <div class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                        <h3 class="text-lg font-semibold text-gray-700">Umat Lapar</h3>
+                        <p class="text-sm text-gray-500">Your Guide to Flavorful Discoveries!</p>
+                </div>
+                <div>
+                        <h3 class="text-lg font-semibold text-gray-700">Company</h3>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                                <li><a href="#" class="hover:text-orange-500">About Us</a></li>
+                                <li><a href="#" class="hover:text-orange-500">Careers</a></li>
+                                <li><a href="#" class="hover:text-orange-500">Blog</a></li>
+                                <li><a href="#" class="hover:text-orange-500">Contact Us</a></li>
+                        </ul>
+                </div>
+                <div>
+                        <h3 class="text-lg font-semibold text-gray-700">Popular Food</h3>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                                <li><a href="#" class="hover:text-orange-500">Western Food</a></li>
+                                <li><a href="#" class="hover:text-orange-500">Chinese Food</a></li>
+                                <li><a href="#" class="hover:text-orange-500">Thailand Food</a></li>
+                        </ul>
+                </div>
+        </div>
+        <div class="text-center text-sm text-gray-500 mt-6">
+                &copy; Copyright Umat Lapar 2024
+        </div>
+</footer>
+</div>
+</body>
+</html>

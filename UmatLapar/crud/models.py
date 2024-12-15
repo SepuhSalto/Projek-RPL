@@ -16,7 +16,8 @@ class Users(models.Model):
     hobi = models.TextField(blank=True)
     pekerjaan = models.TextField(max_length=100, blank=True)
     alamat = models.TextField(blank=True)
-    foto_profil = models.ImageField(upload_to='images/', blank=True)
+    foto_profil = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
+    foto_background = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -37,7 +38,7 @@ class Rating(models.Model):
     idpengguna = models.ForeignKey(Users, on_delete=models.CASCADE)
     idmenu = models.ForeignKey('Menu', on_delete=models.CASCADE)
     rating = models.IntegerField()
-    foto = models.ImageField(upload_to='images/', blank=True)
+    foto = models.ImageField(upload_to='images/', blank=True, default='default.jpg')
     video = models.FileField(upload_to='videos/', blank=True)
     komentar = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,7 +63,7 @@ class Restoran(models.Model):
     waktuBuka = models.TimeField(blank=False)
     waktuTutup = models.TimeField(blank=False)
     alamat = models.TextField(blank=False)
-    foto = models.ImageField(upload_to='images/', blank=True)
+    foto = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
     hargaTerkecil = models.IntegerField()
     hargaTerbesar = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -77,13 +78,24 @@ class Menu(models.Model):
     idkategori = models.ForeignKey(kategori, on_delete=models.CASCADE, default=1)
     idrestoran = models.ForeignKey(Restoran, on_delete=models.CASCADE)
     namaMenu = models.CharField(max_length=50)
-    foto = models.ImageField(upload_to='images/', blank=True)
+    foto = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
+    rating_count = models.IntegerField(default=0)
+    Deskripsi = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def average_rating(self):
         return self.rating_set.aggregate(Avg('rating'))['rating__avg'] or 0 
+
     def __str__(self):
         return self.namaMenu
+
+@receiver(post_save, sender=Rating)
+def update_menu_rating_count(sender, instance, created, **kwargs):
+    if created:
+        menu = instance.idmenu
+        menu.rating_count = menu.rating_set.count()
+        menu.save()
 
 
 @receiver(post_save, sender=Rating)
