@@ -1,0 +1,163 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>UmatLapar</title>
+        {% tailwind_css %}
+    </head>
+    <body>
+            <!-- NavBar -->
+    <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+        <!-- flex container -->
+        <div class="flex items-center justify-between ml-10">
+          <!-- Logo -->
+          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+        </div>
+        <ul class="flex space-x-10">
+          <li><a href="{% url 'crud:homepage' user_id %}" class="text-gray-500 hover:text-orange-500">Home</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+          <li><a href="{% url 'crud:search' user_id %}" class="text-gray-500 hover:text-orange-500">Search</a></li>
+        </ul>
+        <div class="flex items-center space-x-3 mr-10">
+          <a href="{% url 'crud:profile' user_id %}" class="text-gray-700">{{ user.username }}</a>
+          <a href="{% url 'crud:profile' user_id %}"></a>
+            <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+          </a>
+        </div>
+      </nav>
+
+            <!-- Main Content -->
+            <div class="max-w-7xl mx-auto py-12">
+                <!-- Hero Section -->
+                <div class="flex gap-8 mb-12">
+                    <!-- Main Image -->
+                    <div class="w-1/2">
+                        <img
+                            src="{{ restaurant.foto.url }}"
+                            alt="Restaurant"
+                            class="rounded-lg w-full h-full object-cover"
+                        />
+                    </div>
+
+                    <!-- Title and Rating -->
+                    <div class="w-1/2 flex flex-col justify-center">
+                        <h1 class="text-6xl font-bold mb-4">{{ restaurant.namaRestoran }}</h1>
+                        
+                        <p class="text-gray-600">{{ restaurant.alamat }}</p>
+                        <p class="text-gray-600">Open: {{ restaurant.waktuBuka }} - {{ restaurant.waktuTutup }}</p>
+                        <p class="text-gray-600">Price Range: Rp.{{ restaurant.hargaTerkecil }} - Rp.{{ restaurant.hargaTerbesar }}</p>
+                    </div>
+                </div>
+
+                <!-- Food List Section -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold mb-6">
+                        Menus Provided by {{ restaurant.namaRestoran }}
+                    </h2>
+
+                    <!-- Food Item Card -->
+                    {% for menu in menus %}
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
+                        >
+                            <div class="flex items-center gap-4">
+                                <img
+                                    src="{{ menu.foto.url }}"
+                                    alt="{{ menu.namaMenu }}"
+                                    class="w-16 h-16 rounded-lg object-cover"
+                                />
+                                <div>
+                                    <h3 class="font-semibold">{{ menu.namaMenu }}</h3>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-gray-600 text-sm">({{ menu.average_rating|floatformat:1 }})</span>
+                                        <div class="flex text-yellow-400">
+                                            {% for i in "12345" %}
+                                            {% if i <= menu.avg_rating|floatformat:0 %}
+                                                ★
+                                            {% else %}
+                                                ☆
+                                            {% endif %}
+                                        {% endfor %}
+                                        </div>
+                                        
+                                        <span class="text-gray-600 text-sm">{{ menu.rating_count }} Reviews</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'crud:rating_details' menu.idmenu user.idpengguna %}" class="p-2 border rounded-lg hover:bg-gray-50">
+                                <span class="text-gray-400 py-4 px-3">★</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="bg-white mt-16 border-t">
+                <div class="max-w-6xl mx-auto px-6 py-12">
+                    <div class="grid grid-cols-4 gap-8">
+                        <div>
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="{% static 'mysite/images/Logo.png' %}"
+                                    alt="Umat Lapar Logo"
+                                    class="w-8 h-8"
+                                />
+                                <span class="ml-2 font-semibold">Umat Lapar</span>
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                Your Guide to Flavorful Discoveries!
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold mb-4">Company</h3>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">About Us</p>
+                                <p class="text-gray-600">Careers</p>
+                                <p class="text-gray-600">Blog</p>
+                                <p class="text-gray-600">Contact Us</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold mb-4">Popular Food</h3>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">Fast Food</p>
+                                <p class="text-gray-600">Western Food</p>
+                                <p class="text-gray-600">Chinese Food</p>
+                                <p class="text-gray-600">Thailand Food</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold mb-4">Our Social Media</h3>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">Facebook</p>
+                                <p class="text-gray-600">Twitter</p>
+                                <p class="text-gray-600">LinkedIn</p>
+                                <p class="text-gray-600">Instagram</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex justify-between items-center mt-12 pt-8 border-t text-sm text-gray-500"
+                    >
+                        <p>© Copyright Umat Lapar 2024</p>
+                        <div class="flex space-x-6">
+                            <span>FAQ</span>
+                            <span>Terms of Condition</span>
+                            <span>Privacy Policy</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

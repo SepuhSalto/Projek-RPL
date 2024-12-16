@@ -7,7 +7,6 @@
     <title>UmatLapar</title>
     {% tailwind_css %}
   </head>
-  {% for menu in recommended_menus %}
   <body>
     <!-- NavBar -->
     <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
@@ -18,14 +17,15 @@
         <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
       </div>
       <ul class="flex space-x-10">
-        <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
+        <li><a href="{% url 'crud:homepage' user_id %}" class="text-gray-500 hover:text-orange-500">Home</a></li>
         <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
-        <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
+        <li><a href="{% url 'crud:search' user_id %}" class="text-gray-500 hover:text-orange-500">Search</a></li>
       </ul>
       <div class="flex items-center space-x-3 mr-10">
-        <div class="text-gray-700">Esa Nandana</div>
-        <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
-        </div>
+        <a href="{% url 'crud:profile' user_id %}" class="text-gray-700">{{ user.username }}</a>
+        <a href="{% url 'crud:profile' user_id %}"></a>
+          <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+        </a>
       </div>
     </nav>
 
@@ -36,240 +36,102 @@
           <div class="w-1/2">
             <div class="flex">
               <img
-                src="{{ menu.foto.url }}"
-                alt="Babi Guling Pan Ana"
-                class="w-full rounded-lg object-cover"
+          src="{{ menu.foto.url }}"
+          alt="{{ menu.namaMenu }}"
+          class="w-full rounded-lg object-cover"
               />
               <span
-                class="absolute top-4 left-4 bg-white px-3 py-1 rounded-full flex items-center"
+          class="absolute top-4 left-4 bg-white px-3 py-1 rounded-full flex items-center"
               >
               </span>
             </div>
           </div>
 
           <div class="w-1/2">
-            <h1 class="text-6xl font-semibold mb-4">Babi Guling Pan Ana</h1>
+            <h1 class="text-6xl font-semibold mb-4">{{ menu.namaMenu }}</h1>
+            <p class="text-gray-600 text-sm mb-4"><a href="{% url 'crud:restaurant_details' restaurant.idrestoran user_id %}">
+              {{ restaurant.namaRestoran }}
+            </a></p>
+           
             <div class="flex items-center mb-1">
               <div class="flex">  
-              </div>⭐⭐⭐⭐
-              <span class="ml-2 text-gray-600">3,812 Reviews</span>
+              </div>
+                <span class="text-gray-600 text-sm ml-2"> ({{ menu.average_rating|floatformat:1 }}) </span>
+                <div class="flex text-yellow-400">
+                {% for i in "12345" %}
+                  {% if i|add:"0" <= menu.average_rating|floatformat:0|add:"0" %}
+                  ★
+                  {% else %}
+                  ☆
+                  {% endif %}
+                {% endfor %}
+                </div>
+                <span class="text-gray-600 text-sm ml-2"> {{ menu.rating_count }} Reviews</span>
             </div>
 
-            <!-- {/* Reviews */} -->
-            <div class="flex flex-row space-x-6 ">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <p class="mb-2">
-                  Resto ini nyaman, bersih, dan makanannya juga enak, sangat pas di mulut orang Bali.
-                </p>
-                <div class="flex items-center mt-4">
-                  <img
-                    src="{{ menu.foto.url }}"
-                    alt="Reviewer"
-                    class="w-10 h-10 rounded-full"
-                  />
-                  <div class="ml-3">
-                    <p class="font-medium">Esa Nandana</p>
-                    <p class="text-sm text-gray-500">Jimbaran, Indonesia</p>
-                  </div>
-                  <div class="ml-auto flex items-center">
-                    <Star class="w-4 h-4 text-yellow-400" fill="currentColor" />
-                    <span class="ml-1">5.0</span>
-                  </div>
-                </div>
+            <!-- Highest Review -->
+            {% if ratings %}
+            {% with highest_ratings=ratings|slice:":2" %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+              {% for rating in highest_ratings %}
+              <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+            <p class="mb-2">{{ rating.komentar }}</p>
+            <div class="flex items-center mt-4">
+              <img src="{{ rating.idpengguna.foto_profil.url }}" alt="Reviewer" class="w-10 h-10 rounded-full" />
+              <div class="ml-3">
+              <p class="font-medium">{{ rating.idpengguna.username }}</p>
+              <p class="text-sm text-gray-500">{{ rating.idpengguna.alamat }}</p>
               </div>
-
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <p class="mb-2">
-                  The flavors are spot-on! The pork is tender and juicy, with
-                  spices perfectly absorbed into every bite, and the crispy skin
-                  adds an amazing texture.
-                </p>
-                <div class="flex items-center mt-4">
-                  <img
-                    src="{{ menu.foto.url }}"
-                    alt="Reviewer"
-                    class="w-10 h-10 rounded-full"
-                  />
-                  <div class="ml-3">
-                    <p class="font-medium">Joseph Udiana</p>
-                    <p class="text-sm text-gray-500">Bali, Indonesia</p>
-                  </div>
-                  <div class="ml-auto flex items-center">
-                    <Star class="w-4 h-4 text-yellow-400" fill="currentColor" />
-                    <span class="ml-1">4.5</span>
-                  </div>
-                </div>
+              <div class="ml-auto flex items-center">
+              <span class="text-orange-500 mr-1">★</span>
+              <span class="font-medium">{{ rating.rating }}</span>
               </div>
             </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endwith %}
+          {% endif %}
 
-            <button
-              class="mt-6 bg-orange-500 text-white px-6 py-2 rounded-lg flex items-center justify-center w-full"
-            >
+            <a href="{% url 'crud:create_rating'  menu.idmenu user_id %}" class="mt-6 bg-orange-500 text-white px-6 py-2 rounded-lg flex items-center justify-center w-full">
               Add a Review
-            </button>
+            </a>
           </div>
         </div>
-
+        <!-- Two Highest Reviews -->
+        
         <!-- {/* Other Reviews Section */} -->
         <section>
           <div class="container mx-auto px-4 py-16">
             <!-- Header -->
-            <h1 class="text-4xl font-bold text-center mb-12">Check other Review</h1>
+            <h1 class="text-4xl font-bold text-center mb-12">Check other Reviews</h1>
             
             <!-- Reviews Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Review Card 1 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Relvi" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Relvi Schumacker</h3>
-                            <p class="text-gray-500 text-sm">Toronto, Canada</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.0</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 2 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Rodger" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Rodger Struck</h3>
-                            <p class="text-gray-500 text-sm">Jakarta, Indonesia</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.0</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 3 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Mary" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Mary Freund</h3>
-                            <p class="text-gray-500 text-sm">Bangkok, Thailand</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.0</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 4 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="John" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">John Dukes</h3>
-                            <p class="text-gray-500 text-sm">Perth, Australia</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.8</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 5 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Rhonda" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Rhonda Rhodes</h3>
-                            <p class="text-gray-500 text-sm">Istanbul, Turkey</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">5.0</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 6 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Kimberly" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Kimberly Mastrangelo</h3>
-                            <p class="text-gray-500 text-sm">Praha, Czech Republic</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.4</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 7 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Joshua" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Joshua Jones</h3>
-                            <p class="text-gray-500 text-sm">Amsterdam, Netherlands</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">5.0</span>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Review Card 8 -->
-                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-                    <p class="text-gray-700 mb-6">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. At aliquam taciti semper condimentum, efficitur porta viverra.
-                    </p>
-                    <div class="flex items-center">
-                        <img src="{{ menu.foto.url }}" alt="Patricia" class="w-10 h-10 rounded-full mr-3"/>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-gray-900">Patricia Sanders</h3>
-                            <p class="text-gray-500 text-sm">London, United Kingdom</p>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-orange-500 mr-1">★</span>
-                            <span class="font-medium">4.5</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Button -->
-            <div class="text-center mt-12">
-                <button class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">
-                    See All Reviews
-                </button>
-            </div>
+            {% if ratings %}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% for rating in ratings %}
+      <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+        <p class="text-gray-700 leading-relaxed mb-4">
+          {{ rating.komentar }}
+        </p>
+        <div class="flex items-center">
+          <img src="{{ rating.idpengguna.foto_profil.url }}" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+          <div class="ml-3">
+            <p class="font-semibold text-gray-800">{{ rating.idpengguna.username }}</p>
+            <p class="text-sm text-gray-500">{{ rating.idpengguna.alamat }}</p>
+          </div>
+          <div class="ml-auto flex items-center">
+            <span class="text-orange-500 text-lg">★</span>
+            <span class="text-gray-800 font-semibold ml-1">{{ rating.rating }}</span>
+          </div>
         </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+            <!-- Button -->
+            <div class="text-center mt-12"><button class="bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors">See All Reviews</button></div>
+              
         </section>
       </main>
 
@@ -336,5 +198,4 @@
       </footer>
     </div>
   </body>
-  {% endfor %}
 </html>

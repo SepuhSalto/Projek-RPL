@@ -7,27 +7,23 @@
     <title>UmatLapar</title>
     {% tailwind_css %}
   </head>
-  {% for menu in recommended_menus %}
   <body>
       <!-- NavBar -->
-      <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
-        <!-- flex container -->
-        <div class="flex items-center justify-between ml-10">
-          <!-- Logo -->
-          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
-          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
-        </div>
-        <ul class="flex space-x-10">
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
-        </ul>
-        <div class="flex items-center space-x-3 mr-10">
-          <div class="text-gray-700">Esa Nandana</div>
-          <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
-          </div>
-        </div>
-      </nav>
+    <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+      <!-- flex container -->
+      <div class="flex items-center justify-between ml-10">
+        <!-- Logo -->
+        <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+        <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+      </div>
+      <ul class="flex space-x-10">
+      
+      </ul>
+      <div class="flex items-center space-x-3 mr-10">
+        <a href="#" class="text-gray-700">{{ user.username }}</a>
+          <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+      </div>
+    </nav>
 
     <div class="container mx-auto px-4 py-12 ">
       <div class="flex flex-col md:flex-row gap-8">
@@ -42,146 +38,147 @@
           </div>
         </div>
 
-        <!-- Right side - Review Form -->
-        <div class="w-full md:w-1/2">
-          <h1 class="text-3xl font-bold mb-4">Add a review</h1>
-
+        <form method="post" enctype="multipart/form-data" action="{% url 'crud:create_rating' menu.idmenu user.idpengguna %}" class="w-1/2">
+          {% csrf_token %}
+          <h2 class="text-2xl font-semibold mb-2">Add your review</h2>
           <!-- Star Rating -->
           <div class="flex gap-2 mb-6">
-            <svg
-              class="w-8 h-8 text-orange-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-              ></path>
-            </svg>
-            <svg
-              class="w-8 h-8 text-orange-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-              ></path>
-            </svg>
-            <svg
-              class="w-8 h-8 text-orange-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-              ></path>
-            </svg>
-            <svg
-              class="w-8 h-8 text-orange-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-              ></path>
-            </svg>
-            <svg
-              class="w-8 h-8 text-orange-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
-              ></path>
-            </svg>
+              {% for i in "12345" %}
+              <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" class="hidden" />
+              <label for="star{{ i }}" onclick="setRating('{{ i }}')">
+                  <svg
+                      class="w-8 h-8 text-gray-400 cursor-pointer star"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                  >
+                      <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      ></path>
+                  </svg>
+              </label>
+              {% endfor %}
           </div>
-
+      
           <!-- Review Text Area -->
           <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Add your review</h2>
-            <textarea
-              class="w-full h-32 p-4 border border-gray-200 rounded-lg resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-              placeholder="Add your review"
-            ></textarea>
+              <textarea name="komentar" id="komentar" rows="4" class="w-full p-2 border rounded-lg">{{ form.komentar.value }}</textarea>
           </div>
-
+      
           <!-- Media Upload Section -->
-          <div class="mb-8">
-            <h2 class="text-xl font-semibold mb-4">Add a media</h2>
-            <div class="flex gap-4">
-              <!-- Photo Upload -->
-              <div
-                class="w-1/2 aspect-square bg-gray-100 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200"
-              >
-                <svg
-                  class="w-8 h-8 text-gray-400 mt-12"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
-                </svg>
-                <span class="text-gray-500 mb-12">Photo</span>
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold mb-4">Add a media</h2>
+              <div class="flex gap-4">
+                  <!-- Photo Upload -->
+                  <div
+                      class="w-1/2 h-40 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 relative"
+                  >
+                      <label for="foto-upload" class="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
+                          <svg
+                              class="w-8 h-8 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                          >
+                              <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                              ></path>
+                              <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                              ></path>
+                          </svg>
+                          <span class="text-gray-500">Photo</span>
+                          <input id="foto-upload" name="foto" type="file" accept="image/*" class="hidden" onchange="previewImage(event)" />
+                      </label>
+                      <img id="foto-preview" class="hidden absolute inset-0 w-full h-full object-cover rounded-lg" />
+                  </div>
+      
+                  <!-- Video Upload -->
+                  <div
+                      class="w-1/2 h-40 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-200 relative"
+                  >
+                      <label for="video-upload" class="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
+                          <svg
+                              class="w-8 h-8 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                          >
+                              <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                              ></path>
+                          </svg>
+                          <span class="text-gray-500">Video</span>
+                          <input id="video-upload" name="video" type="file" accept="video/*" class="hidden" onchange="previewVideo(event)" />
+                      </label>
+                      <video id="video-preview" class="hidden absolute inset-0 w-full h-full object-cover rounded-lg" controls></video>
+                  </div>
               </div>
-
-              <!-- Video Upload -->
-              <div
-                class="w-1/2 aspect-square bg-gray-100 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200"
-              >
-                <svg
-                  class="w-8 h-8 text-gray-400 "
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                  ></path>
-                </svg>
-                <span class="text-gray-500 ">Video</span>
-              </div>
-            </div>
           </div>
-
+      
           <!-- Submit Button -->
-          <button
-            class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors"
-          >
-            Add a Review
-          </button>
+            <a href="{% url 'crud:rating_details' menu.idmenu user.idpengguna %}">
+              <button
+                type="submit"
+                class="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Add a Review
+              </button>
+            </a>
+
+            
+      </form>
+      <a href="{% url 'crud:rating_details' menu.idmenu user.idpengguna %}">
+        <button
+        type="button"
+        class="w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition-colors"
+        >
+        Cancel
+        </button>
+      </a>
+      <!-- Scripts -->
+      <script>
+          function setRating(rating) {
+              const stars = document.querySelectorAll('.star');
+              stars.forEach((star, index) => {
+                  if (index < rating) {
+                      star.classList.add('text-orange-500');
+                      star.classList.remove('text-gray-400');
+                      star.setAttribute('fill', 'currentColor');
+                  } else {
+                      star.classList.add('text-gray-400');
+                      star.classList.remove('text-orange-500');
+                      star.setAttribute('fill', 'none');
+                  }
+              });
+              document.getElementById('star' + rating).checked = true;
+          }
+      
+          function previewImage(event) {
+              const output = document.getElementById('foto-preview');
+              output.src = URL.createObjectURL(event.target.files[0]);
+              output.classList.remove('hidden');
+          }
+      
+          function previewVideo(event) {
+              const output = document.getElementById('video-preview');
+              output.src = URL.createObjectURL(event.target.files[0]);
+              output.classList.remove('hidden');
+          }
+      </script>
+      
         </div>
       </div>
     </div>
@@ -247,5 +244,4 @@
             </div>
           </footer>
   </body>
-  {% endfor %}
 </html>

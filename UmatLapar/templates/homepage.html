@@ -1,4 +1,5 @@
-{% load static tailwind_tags %} {% load static %}
+{% load static tailwind_tags %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,222 +8,92 @@
     <title>UmatLapar</title>
     {% tailwind_css %}
   </head>
-  {% for menu in recommended_menus %}
   <body>
+    <body>
       <!-- NavBar -->
-      <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
-        <!-- flex container -->
-        <div class="flex items-center justify-between ml-10">
-          <!-- Logo -->
-          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
-          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
-        </div>
-        <ul class="flex space-x-10">
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
-          <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
-        </ul>
-        <div class="flex items-center space-x-3 mr-10">
-          <div class="text-gray-700">Esa Nandana</div>
-          <img src="{% static 'mysite/images/profile-icon.png' %}" alt="Umat Lapar Logo" class="h-8" />
-          </div>
-        </div>
-      </nav>
+    <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+      <!-- flex container -->
+      <div class="flex items-center justify-between ml-10">
+        <!-- Logo -->
+        <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+        <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+      </div>
+      <ul class="flex space-x-10">
+        <li><a href="{% url 'crud:homepage' user_id %}" class="text-gray-500 hover:text-orange-500">Home</a></li>
+        <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+        <li><a href="{% url 'crud:search' user_id %}" class="text-gray-500 hover:text-orange-500">Search</a></li>
+      </ul>
+      <div class="flex items-center space-x-3 mr-10">
+        <a href="{% url 'crud:profile' user_id %}" class="text-gray-700">{{ user.username }}</a>
+        <a href="{% url 'crud:profile' user_id %}"></a>
+          <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+        </a>
+      </div>
+    </nav>
+  
+<!-- Hero Section -->
+<div class="flex md:flex-row items-center justify-between px-8 md:px-20 py-16">
+  <!-- Sisi kiri -->
+  <div class="max-w-lg text-center md:text-left">
+    <p class="flex item text-gray-500 font-medium text-sm mb-2"><span><img src="{% static 'mysite/images/icon-food.png' %}" alt=""></span>The best food delivery app in the world</p>
+    <h1 class="text-4xl md:text-6xl font-medium text-gray-900 leading-tight mb-4">
+      Hungry? Discover What to Eat!
+    </h1>
+    <p class="text-gray-600 text-base md:text-lg mb-8">
+      Enhance your food journey effortlessly - because finding the best eats should be exciting, not exhausting.
+    </p>
+    <div class="">
+      <input
+        type="text"
+        placeholder="What are you looking?"
+        class="text-center text-sm w-full font-regular bg-gray-100 text-black rounded-lg py-3 px-4 outline-none focus:ring-2 focus:ring-orange-500"
+      />
+    </div>
+  </div>
 
-      <!-- Main Content -->
-      <div class="max-w-7xl mx-auto py-12">
-        <!-- Hero Section -->
-        <div class="flex gap-8 mb-12">
-          <!-- Main Image -->
-          <div class="w-1/2">
-            <img
-              src="{{ menu.foto.url }}"
-              alt="Food"
-              class="rounded-lg w-full h-full object-cover"
-            />
+  <!-- Sisi kanan -->
+  <div class="flex items-center justify-center mt-10 md:mt-0 lg:w-96 md:w-auto px-10 sm: w-0">
+    <div class="">
+      <img
+        src="{% static 'mysite/images/food-image.png' %}"
+        alt="Croissant"
+        class="w-96 h-auto object-cover"
+      />  
+    </div>
+  </div>
+</div>
+  <!-- Top Section Best Rated  -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-medium text-center my-8 mb-12">Top Best Rated Food of the Month</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for menu in recommended_menus|slice:":8" %}
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <a href="{% url 'crud:rating_details' menu.idmenu user_id %}">
+          <img src="{{ menu.foto.url }}" alt="{{ menu.namaMenu }}" class="w-full h-48 object-cover">
+        </a>
+        <div class="p-4">
+          <h2 class="text-lg font-bold">{{ menu.namaMenu }}</h2>
+          <div class="flex items-center my-2">
+            <span class="text-gray-600 text-sm ml-2"> ({{ menu.average_rating|floatformat:1 }}) </span>
+            <span class="text-yellow-500 text-sm">
+              {% for i in "12345" %}
+                {% if i <= menu.avg_rating|floatformat:0 %}
+                  ★
+                {% else %}
+                  ☆
+                {% endif %}
+              {% endfor %}
+            </span>
+            <span class="ml-2 text-sm text-gray-600">{{ menu.rating_count }} Reviews</span>
           </div>
-
-          <!-- Title and Rating -->
-          <div class="w-1/2 flex flex-col justify-center">
-            <h1 class="text-6xl font-bold mb-4">Babi Guling Pan Ana</h1>
-            <div class="flex items-center gap-2 mb-4">
-              <!-- Star Rating -->
-              <div class="flex text-yellow-400">
-                <span>★★★★★</span>
-              </div>
-              <span class="text-gray-600">3,812 Reviews</span>
-            </div>
-            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg w-fit">
-              Add a Review
-            </button>
-          </div>
-        </div>
-
-        <!-- Food List Section -->
-        <div class="mb-8">
-          <h2 class="text-2xl font-bold mb-6">
-            What Food Would You Like to Rate?
-          </h2>
-
-          <!-- Food Item Card -->
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="space-y-4">
-            <div
-              class="flex items-center justify-between p-4 border rounded-lg hover:shadow-md"
-            >
-              <div class="flex items-center gap-4">
-                <img
-                  src="{{ menu.foto.url }}"
-                  alt="Food"
-                  class="w-16 h-16 rounded-lg object-cover"
-                />
-                <div>
-                  <h3 class="font-semibold">Babi Guling Pan Ana</h3>
-                  <div class="flex items-center gap-2">
-                    <div class="flex text-yellow-400">
-                      <span>★★★★★</span>
-                    </div>
-                    <span class="text-gray-600 text-sm">3,812 Reviews</span>
-                  </div>
-                </div>
-              </div>
-              <button class="p-2 border rounded-lg hover:bg-gray-50">
-                <span class="text-gray-400 py-4 px-3">★</span>
-              </button>
-            </div>
-          </div>
+          <p class="text-gray-600 text-sm">{{ menu.Deskripsi|truncatewords:20 }}</p>
         </div>
       </div>
-
+      {% endfor %}
+    </div>
+  </div>
+  
+      
       <!-- {/* Footer */} -->
       <footer class="bg-white mt-16 border-t">
         <div class="max-w-6xl mx-auto px-6 py-12">
@@ -285,6 +156,6 @@
         </div>
       </footer>
     </div>
-  </body>
-  {% endfor %}
+    </body>
+    </body>
 </html>

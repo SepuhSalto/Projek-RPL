@@ -1,0 +1,159 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Review Profile Page</title>
+  {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+  <!-- NavBar -->
+  <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+    <!-- flex container -->
+    <div class="flex items-center justify-between ml-10">
+      <!-- Logo -->
+      <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+      <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+    </div>
+    <ul class="flex space-x-10">
+      <li><a href="{% url 'crud:homepage' user_id %}" class="text-gray-500 hover:text-orange-500">Home</a></li>
+      <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+      <li><a href="{% url 'crud:search' user_id %}" class="text-gray-500 hover:text-orange-500">Search</a></li>
+    </ul>
+    <div class="flex items-center space-x-3 mr-10">
+      <a href="{% url 'crud:profile' user_id %}" class="text-gray-700">{{ user.username }}</a>
+      <a href="{% url 'crud:profile' user_id %}"></a>
+        <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="relative bg-cover bg-center h-96">
+    <img src="{{ user.foto_background.url }}" alt="Background Image" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+  </div>
+
+  <!-- Profile and Main Content Section -->
+  <div class="container mx-auto px-6 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Profile Section -->
+      <div class="lg:col-span-1">
+        <div class="bg-white p-6 rounded shadow relative">
+          <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+            <img src="{{ user.foto_profil.url }}" alt="Profile Picture" class="w-28 h-28 mx-auto rounded-full border-4 border-white shadow-lg">
+          </div>
+          <div class="text-center mt-12">
+            <h2 class="text-xl font-bold">{{ user.username }}</h2>
+            <p class="text-sm text-gray-500">{{ user.pekerjaan }}</p>
+            <p class="text-sm text-gray-400">{{ user.handphone }}</p>
+            <p class="text-sm text-gray-500 mt-2">{{ user.alamat }}</p>
+            <p class="text-sm text-gray-500 mt-2">{{ user.hobi }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Section -->
+      <div class="lg:col-span-2">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <!-- Header -->
+          <div class="flex flex-col lg:flex-row items-center lg:items-start justify-between mb-6">
+            <div class="text-center lg:text-left">
+              <h1 class="text-4xl font-extrabold">{{ user.username }}</h1>
+              <p class="text-lg text-gray-600 mt-2">{{ user.pekerjaan }}</p>
+            </div>
+            <button class="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 mt-4 lg:mt-0">
+            <a href="{% url 'crud:update_user_profile' user_id %}" class="text-white">Edit Profile</a>
+            </button>
+            </div>
+            <h2 class="text-2xl font-bold mb-6">Food Reviews</h2>
+            {% for rating in ratings|dictsortreversed:"rating"|slice:":2" %}
+            <div class="bg-gray-50 p-6 rounded shadow mb-6">
+            <h3 class="text-lg font-semibold">{{ rating.idmenu.namaMenu|default_if_none:"No Comment" }}</h3>
+            <p class="text-gray-600">{{ rating.komentar|default_if_none:"No Comment" }}</p>
+            {% if rating.foto %}
+              <img src="{{ rating.foto.url }}" alt="Food Image" class="w-1/2 h-auto mt-4 rounded">
+            {% endif %}
+            <div class="flex justify-between items-center mt-4">
+              <span class="text-sm text-gray-500">{{ rating.created_at|date:"Y-m-d" }}</span>
+              <div class="flex space-x-1">
+              {% for j in "12345" %}
+              {% if j <= rating.rating|stringformat:"i" %}
+              <span class="text-yellow-500">★</span>
+              {% else %}
+              <span class="text-gray-300">★</span>
+              {% endif %}
+              {% endfor %}
+              </div>
+            </div>
+            </div>
+            {% endfor %}
+          </div>
+          </div>
+        </div>
+        </div>
+<!-- Favorite Section -->
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-lg rounded-lg p-8">
+      <h2 class="text-xl font-semibold mb-4">Menu Favorit Saya</h2>
+      <div class="mt-4">
+        <h3 class="text-lg font-bold">Menu</h3>
+        <div class="space-y-4 mt-4">
+          {% for menu in favorite_menus|slice:":4" %}
+          <div class="flex items-center px-10 py-3 bg-gray-50 rounded">
+            <img src="{{ menu.foto.url }}" alt="Food" class="w-16 h-16 object-cover rounded">
+            <div class="ml-4">
+              <h4 class="font-semibold"><a href="{% url 'crud:rating_details' menu.idmenu user.idpengguna %}">{{ menu.namaMenu }}</a></h4>
+              <p class="text-sm text-gray-500">{{ menu.rating_count }} Reviews</p>
+              <div class="flex text-yellow-500">
+                {% for i in "12345" %}
+                {% if i <= menu.average_rating|stringformat:"i" %}
+                <span>★</span>
+                {% else %}
+                <span class="text-gray-300">★</span>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+        
+            </div>
+          </div>
+  </div>
+
+  <footer class="bg-white mt-16 border-t">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <img
+              src="{% static 'mysite/images/Logo.png' %}"
+              alt="Umat Lapar Logo"
+              class="w-8 h-8"
+            />
+            <span class="ml-2 font-semibold">Umat Lapar</span>
+          </div>
+          <p class="text-sm text-gray-600">
+            Your Guide to Flavorful Discoveries!
+          </p>
+        </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Popular Food</h3>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li><a href="search_results.html" class="hover:text-orange-500">Western Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Chinese Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Thailand Food</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-sm text-gray-500 mt-6">&copy; Copyright Umat Lapar 2024</div>
+  </footer>
+</body>
+</html>

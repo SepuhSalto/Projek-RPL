@@ -1,0 +1,144 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+  <!-- NavBar -->
+    <nav class="sticky top-0 bg-white flex justify-between items-center p-5 shadow-md">
+      <!-- flex container -->
+      <div class="flex items-center justify-between ml-10">
+        <!-- Logo -->
+        <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+        <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+      </div>
+      <ul class="flex space-x-10">
+
+      </ul>
+      <div class="flex items-center space-x-3 mr-10">
+        <div class="text-gray-700">{{ user.username }}</div>
+        <img src="{{ user.foto_profil.url }}" alt="Profile Icon" class="h-8 rounded-full" />
+      </div>
+    </nav>
+
+<!-- Edit Profile Section -->
+<div class="container mx-auto px-6 py-10"></div>
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-extrabold mb-6 text-center">Edit Profile</h2>        
+        <!-- Form -->
+        <form action="{% url 'crud:update_user_profile' user_id=user.idpengguna %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="flex justify-center mb-6">
+                <div class="relative">
+                <img id="profilePreview" src="{{ user.foto_profil.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full border-4 border-white shadow-lg">
+                <label for="id_foto_profil" class="absolute bottom-0 right-0 bg-orange-500 text-white rounded-full p-2 cursor-pointer">
+                    <span class="material-icons">edit</span>
+                    <input type="file" id="id_foto_profil" name="foto_profil" class="hidden" onchange="previewProfileImage(event)">
+                </label>
+                </div>
+            </div>
+            <script>
+                function previewProfileImage(event) {
+                const reader = new FileReader();
+                reader.onload = function(){
+                    const output = document.getElementById('profilePreview');
+                    output.src = reader.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+                }
+            </script>
+            <!-- Username -->
+            <div class="mb-4">
+            <label for="id_username" class="block text-lg font-semibold text-gray-700">Username</label>
+            <input type="text" id="id_username" name="username" value="{{ form.username.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+            <label for="id_email" class="block text-lg font-semibold text-gray-700">Email</label>
+            <input type="email" id="id_email" name="email" value="{{ form.email.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+
+            <!-- Hobby -->
+            <div class="mb-4">
+            <label for="id_hobi" class="block text-lg font-semibold text-gray-700">Hobby</label>
+            <input type="text" id="id_hobi" name="hobi" value="{{ form.hobi.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+
+            <!-- Job -->
+            <div class="mb-4">
+            <label for="id_pekerjaan" class="block text-lg font-semibold text-gray-700">Job</label>
+            <input type="text" id="id_pekerjaan" name="pekerjaan" value="{{ form.pekerjaan.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+
+            <!-- Address -->
+            <div class="mb-4">
+            <label for="id_alamat" class="block text-lg font-semibold text-gray-700">Address</label>
+            <input type="text" id="id_alamat" name="alamat" value="{{ form.alamat.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+            <!-- Handphone -->
+            <div class="mb-4">
+                <label for="id_handphone" class="block text-lg font-semibold text-gray-700">Handphone</label>
+                <input type="text" id="id_handphone" name="handphone" value="{{ form.handphone.value }}" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+            <!-- Background Image -->
+            <div class="mb-4">
+            <label for="id_foto_background" class="block text-lg font-semibold text-gray-700">Background Image</label>
+            <input type="file" id="id_foto_background" name="foto_background" class="w-full p-3 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+            </div>
+
+            <!-- Save Button -->
+            <div class="flex justify-center">
+            <button type="submit" class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                Save Changes
+            </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+  
+
+  <!-- Footer -->
+  <footer class="bg-white mt-16 border-t">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <img
+              src="{% static 'mysite/images/Logo.png' %}"
+              alt="Umat Lapar Logo"
+              class="w-8 h-8"
+            />
+            <span class="ml-2 font-semibold">Umat Lapar</span>
+          </div>
+          <p class="text-sm text-gray-600">
+            Your Guide to Flavorful Discoveries!
+          </p>
+        </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Company</h3>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li><a href="#" class="hover:text-orange-500">About Us</a></li>
+          <li><a href="#" class="hover:text-orange-500">Careers</a></li>
+          <li><a href="#" class="hover:text-orange-500">Blog</a></li>
+          <li><a href="#" class="hover:text-orange-500">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Popular Food</h3>
+        <ul class="text-sm text-gray-500 space-y-2">
+          <li><a href="search_results.html" class="hover:text-orange-500">Western Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Chinese Food</a></li>
+          <li><a href="search_results.html" class="hover:text-orange-500">Thailand Food</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-sm text-gray-500 mt-6">&copy; Copyright Umat Lapar 2024</div>
+  </footer>
+</body>
+</html>

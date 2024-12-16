@@ -22,7 +22,7 @@
                             <li><a href="#" class="hover:text-orange-600">Search</a></li>
                         </ul>
                     </nav>
-                    <a href="#" class="text-white bg-black px-4 py-2 rounded-lg hover:bg-gray-800">Login</a>
+                    <a href="{% url 'crud:Login' %}" class="text-white bg-black px-4 py-2 rounded-lg hover:bg-gray-800">Login</a>
                 </div>
             </header>
     
@@ -64,7 +64,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="id_location" class="block text-sm font-medium text-gray-600">Location</label>
-                            {{ form.Lokasi }}
+                            {{ form.alamat }}
                         </div>
                         <div class="mb-4 flex items-center">
                             <input type="checkbox" id="terms" name="terms" class="mr-2">

@@ -1,0 +1,348 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UmatLapar</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+      <!-- NavBar -->
+      <nav class="sticky top-0s w-full z-50 bg-white flex justify-between items-center p-5 shadow-md">
+        <!-- flex container -->
+        <div class="flex items-center justify-between ml-10">
+          <!-- Logo -->
+          <img src="{% static 'mysite/images/Logo.png' %}" alt="Umat Lapar Logo" class="h-8" />
+          <div class="text-gray-700 ml-3 font-medium">UmatLapar</div>
+        </div>
+        <ul class="flex space-x-10">
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Home</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">About Us</a></li>
+          <li><a href="#" class="text-gray-500 hover:text-orange-500">Search</a></li>
+        </ul>
+        <div class="flex items-center space-x-3 mr-10">
+          <a href="{% url 'crud:Register' %}" class="px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Register</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- main comp -->
+      <div class="container mx-auto px-8 py-16 flex items-center">
+        <div class="w-1/2 pr-8">
+          <div class="flex items-center mb-4 ">
+            <p class="flex item text-gray-500 font-medium text-lg mb-2"><span><img src="{% static 'mysite/images/icon-food.png' %}" alt=""></span>The best food delivery app in the world</p>
+          </div>
+          <h1 class="lg:text-7xl font-semibold mb-6 md:text-4xl sm:text-xl">Discover the Best Food Reviews Right Here for Your Next Delicious Adventure!</h1>
+          <p class="text-gray-600 mb-8">Enhance your food journey effortlessly - because finding the best eats should be exciting, not exhausting.</p>
+          <div class="flex gap-4">
+            <button class="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Get Started</button>
+            <button class="px-6 py-3 flex items-center gap-2 border border-gray-200 rounded-lg hover:bg-gray-50">
+              <span><img src="{% static 'mysite/images/play.png' %}" alt=""></span> Watch Video
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-center mt-10 md:mt-0 lg:w-auto ml-40 md:w-1/2 sm: w-0">
+          <img src="{% static 'mysite/images/food-image.png' %}" alt="Burger" class="w-full rounded-lg">
+        </div>
+      </div>
+      
+      <!-- Features Section -->
+      <div class="bg-gray-50 py-16">
+        <div class="container mx-auto px-12">
+          <h2 class="text-5xl font-semibold text-center mb-8">There are Many Reasons to <br> Choose Us for Your Needs</h2>
+          <p class="text-center text-gray-600 mb-12">Discover convenience, quality insights, and ultimate satisfaction with every food review on our platform.</p>
+          
+          <div class="grid grid-cols-4 gap-8">
+            <div class="bg-white p-6 rounded-xl">
+              <div class="w-full aspect-square bg-white rounded-xl mb-4 flex items-center justify-center">
+                <span class="w-auto h"><img src="{% static 'mysite/images/card-land-1.png' %}" alt=""></span>
+              </div>
+              <h3 class="font-bold mb-2">Find best reviewer</h3>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+            <!-- Repeat similar divs for other features -->
+            <div class="bg-white p-6 rounded-xl">
+              <div class="w-full aspect-square bg-white rounded-xl mb-4 flex items-center justify-center">
+                <span class="w-auto h"><img src="{% static 'mysite/images/card-land-2.png' %}" alt=""></span>
+              </div>
+              <h3 class="font-bold mb-2">Find nearest food</h3>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl">
+              <div class="w-full aspect-square bg-white rounded-xl mb-4 flex items-center justify-center">
+                <span class="w-auto h"><img src="{% static 'mysite/images/card-land-3.png' %}" alt=""></span>
+              </div>
+              <h3 class="font-bold mb-2">Find healty food</h3>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl">
+              <div class="w-full aspect-square bg-white rounded-xl mb-4 flex items-center justify-center">
+                <span class="w-auto h"><img src="{% static 'mysite/images/card-land-4.png' %}" alt=""></span>
+              </div>
+              <h3 class="text-lg font-bold mb-2">Customer Satisfaction</h3>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Process Section -->
+<section class="container mx-auto px-4 py-16">
+  <!-- Section Header -->
+  <div class="text-center  mx-auto mb-20">
+    <h2 class="text-5xl font-semibold text-center mb-8">We've Crafted a Streamlined <br>Experience to Ensure Your Satisfaction</h2>
+    <p class="text-gray-600">We're ensuring that every aspect of our process is designed with your satisfaction in mind</p>
+  </div>
+
+  <!-- Process Steps -->
+  <div class="flex justify-between items-start sticky">
+    <!-- Dashed Connection Line -->
+    <div class="absolute top-1/2 left-60 right-60 border-t-2 border-dashed border-gray-300 mt-40"></div>
+
+    <!-- Step 1 -->
+    <div class="flex-1 text-center z-10">
+      <div class="mb-7">
+        <img src="{% static 'mysite/images/laptop-land-1.png' %}" alt="Browse Your Needs" class="w-full max-w-md mx-auto">
+      </div>
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black text-white font-bold mb-4">
+        1
+      </div>
+      <h3 class="text-xl font-semibold">Browse Your Needs</h3>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="flex-1 text-center z-10">
+      <div class="mb-7">
+        <img src="{% static 'mysite/images/laptop-land-2.png' %}" alt="Find a Reviews" class="w-full max-w-md mx-auto">
+      </div>
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black text-white font-bold mb-4">
+        2
+      </div>
+      <h3 class="text-xl font-semibold">Find a Reviews</h3>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="flex-1 text-center z-10">
+      <div class="mb-7">
+        <img src="{% static 'mysite/images/laptop-land-3.png' %}" alt="Add a Reviews" class="w-full max-w-md mx-auto">
+      </div>
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black text-white font-bold mb-4">
+        3
+      </div>
+      <h3 class="text-xl font-semibold">Add a Reviews</h3>
+    </div>
+  </div>
+</section>
+      
+      <!-- Testimonials Section -->
+      <div class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-12">Umat Lapar in the Words of Our Customers</h2>
+          
+          <div class="grid grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+            <!-- Repeat for other testimonials -->
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>            <div class="bg-white p-6 rounded-xl">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="{% static 'mysite/images/avatar.png' %}" alt="User" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-gray-600">New York, USA</p>
+                </div>
+                <div class="ml-auto flex items-center">
+                  <svg class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                    <!-- Star icon path -->
+                  </svg>
+                  <span class="ml-1">⭐ 4.8</span>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm">Lorem ipsum dolor amet, consectetur adipiscing elit.</p>
+            </div>
+
+            
+          </div>
+      
+          <div class="text-center mt-8">
+            <button class="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600">See All Reviews</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- {/* Footer */} -->
+      <footer class="bg-white mt-16 border-t">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+          <div class="grid grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <img
+                  src="{% static 'mysite/images/Logo.png' %}"
+                  alt="Umat Lapar Logo"
+                  class="w-8 h-8"
+                />
+                <span class="ml-2 font-semibold">Umat Lapar</span>
+              </div>
+              <p class="text-sm text-gray-600">
+                Your Guide to Flavorful Discoveries!
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Company</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">About Us</p>
+                <p class="text-gray-600">Careers</p>
+                <p class="text-gray-600">Blog</p>
+                <p class="text-gray-600">Contact Us</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Popular Food</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Fast Food</p>
+                <p class="text-gray-600">Western Food</p>
+                <p class="text-gray-600">Chinese Food</p>
+                <p class="text-gray-600">Thailand Food</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-4">Our Social Media</h3>
+              <div class="space-y-2">
+                <p class="text-gray-600">Facebook</p>
+                <p class="text-gray-600">Twitter</p>
+                <p class="text-gray-600">LinkedIn</p>
+                <p class="text-gray-600">Instagram</p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center mt-12 pt-8 border-t text-sm text-gray-500"
+          >
+            <p>© Copyright Umat Lapar 2024</p>
+            <div class="flex space-x-6">
+              <span>FAQ</span>
+              <span>Terms of Condition</span>
+              <span>Privacy Policy</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -26,18 +26,15 @@ class MenuFilter(django_filters.FilterSet):
         choices=[(kategori.kategori, kategori.kategori) for kategori in kategori.objects.all()],
         label='Kategori'
     )
-    
-    
-
-    class Meta:
-        model = Menu
-        fields = {
-            'idkategori__kategori': ['exact'],
-            
-        }
-
     def filter_by_rating(self, queryset, name, value):
         if value:
             queryset = queryset.annotate(avg_rating=Avg('rating__rating'))
             queryset = queryset.filter(avg_rating__gte=value)
         return queryset
+    class Meta:
+        model = Menu
+        fields = {
+            'idkategori__kategori': ['exact'],
+        }
+
+   
