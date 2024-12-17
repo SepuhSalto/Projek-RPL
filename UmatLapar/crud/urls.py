@@ -14,4 +14,5 @@ urlpatterns = [
     path('rating_details/<int:menu_id>/<int:user_id>/', views.rating_details, name='rating_details'),
     path('restaurant_details/<int:restaurant_id>/<int:user_id>/', views.restaurant_details, name='restaurant_details'),
     path('update_user_profile/<int:user_id>/', views.update_user_profile, name='update_user_profile'),
+    path('signout/<int:user_id>/', views.signout, name='signout'),
 ]

@@ -50,6 +50,10 @@
             <p class="text-sm text-gray-400">{{ user.handphone }}</p>
             <p class="text-sm text-gray-500 mt-2">{{ user.alamat }}</p>
             <p class="text-sm text-gray-500 mt-2">{{ user.hobi }}</p>
+            <form action="{% url 'crud:signout' user_id %}" method="post" class="inline">
+              {% csrf_token %}
+              <button type="submit"  class="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 mt-1 lg:mt-4">Sign Out</button>
+            </form>
           </div>
         </div>
       </div>
@@ -66,6 +70,7 @@
             <button class="bg-orange-500 text-white px-5 py-2 rounded hover:bg-orange-600 mt-4 lg:mt-0">
             <a href="{% url 'crud:update_user_profile' user_id %}" class="text-white">Edit Profile</a>
             </button>
+            
             </div>
             <h2 class="text-2xl font-bold mb-6">Food Reviews</h2>
             {% for rating in ratings|dictsortreversed:"rating"|slice:":2" %}
@@ -127,7 +132,7 @@
             </div>
           </div>
   </div>
-
+  
   <footer class="bg-white mt-16 border-t">
     <div class="max-w-6xl mx-auto px-6 py-12">
       <div class="grid grid-cols-4 gap-8">

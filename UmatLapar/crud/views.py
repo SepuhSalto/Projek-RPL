@@ -63,7 +63,7 @@ def create_rating(request, menu_id, user_id):
             rating.idmenu = menu
             rating.save()
             messages.success(request, 'Rating created successfully!')
-            return redirect('crud:rating_details', menu_id=menu_id)
+            return redirect('crud:rating_details', menu_id=menu_id, user_id=user_id)
     else:
         form = RatingCreateForm()
     return render(request, 'addReview.html', {'form': form, 'menu': menu, 'user': user})
@@ -133,13 +133,14 @@ def profile(request, user_id):
         'user_id': user_id,  
     }
     return render(request, 'profile.html', context)
-    def signout(request, user_id):
-        user = get_object_or_404(Users, idpengguna=user_id)
-        if user.status == 'Online':
-            user.status = 'Offline'
-            user.save()
-            messages.success(request, 'You have been signed out successfully!')
-        return redirect('crud:Login')
+    
+def signout(request, user_id):
+    user = get_object_or_404(Users, idpengguna=user_id)
+    if user.status == 'Online':
+        user.status = 'Offline'
+        user.save()
+        messages.success(request, 'You have been signed out successfully!')
+    return redirect('crud:Login')
 
 def rating_details(request, menu_id, user_id=None):
     user = get_object_or_404(Users, idpengguna=user_id) if user_id else None
